@@ -1,0 +1,94 @@
+/* 
+    Document   : admin
+    Created on : Oct 20, 2013, 6:33:41 PM
+    Author     : Jesse
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#main{
+    margin: 20px auto;
+    width: 960px;
+    font-family: courier;
+}
+
+th{
+    font-size: 14px;
+    text-align: left;
+    padding: 5px;
+}
+
+img{
+    border: 1px solid #333;
+}
+
+.lefty{
+    float:left;
+    clear:left;
+}
+.righty{
+    float:right;
+    clear:right;
+}
+.clefairy{
+    clear:both;
+}
+
+
+.header{
+    font-size: 42px;
+    text-align: right;
+    padding: 42px 0px;
+}
+
+#galleries{
+    border-spacing:0px;
+    border-collapse: separate;
+    width: 100%;
+    margin: 42px 0px;
+}
+
+
+#galleries td{
+    vertical-align: top;
+
+    padding: 5px;
+}
+
+#galleries .gallery{
+    padding: 3px;
+    border: 1px solid #555;
+}
+
+#galleries .gallery.even{
+    background-color: lightyellow;
+}
+
+#galleries .gallery.odd{
+    background-color: lightcyan;
+}
+
+#galleries .gallery.new{
+    background-color: lightpink;
+}
+
+#galleries textarea{
+    width: 500px;
+}
+
+#galleries input[name="position"]{
+    width: 42px;
+}
+
+#galleries div{
+    background-color: #EEE;
+}
+
+#galleries textarea, #galleries input, #galleries div{
+    padding: 3px;
+    margin: 2px;
+    border: 1px solid #aaa;
+    display: block;
+    height: 12pt;
+}
+
