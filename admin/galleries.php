@@ -24,8 +24,8 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>View Images</th>
-                    <th>Action</th>
-                    
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,13 +34,14 @@
                     foreach ( $galleries as $gallery ): 
                 ?>
                 <form action="/task/post_update_gallery.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $gallery->id ?>"/>
                     <tr class="gallery <?php echo ($gallery->homepage_position % 2) ? "even" : "odd" ?>">
-                    
                         <td><input type="number" name="position" value="<?php echo $gallery->homepage_position ?>"/></td>
                         <td><input type="text"   name="name"     value="<?php echo $gallery->name ?>"/></td>
                         <td><textarea            name='description'><?php echo $gallery->description ?></textarea></td>
                         <td><a href="gallery.php?id=<?php echo $gallery->id ?>">View Images</a></td>
                         <td><button type="submit"/>Update</td>
+                        <td><a href="/task/get_delete_gallery.php?id=<?php echo $gallery->id; ?>"><button type="button">Delete</button</a></td>
                     </tr>
                 </form>
                 <?php endforeach; ?>
@@ -53,7 +54,7 @@
                         <td><textarea name='description'></textarea></td>
                         <td></td>
                         <td><button type="submit"/>Create</td>
-                   
+                        <td></td>
                     </tr>
                 </form>
             </tbody>

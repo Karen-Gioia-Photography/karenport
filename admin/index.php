@@ -9,7 +9,7 @@
             <div class="header">Admin Home</div>
             
             <div class="righty"><a href="galleries.php">Manage Galleries</a></div>   
-            <div class="righty"><a href="/admin">Manage Homepage Slideshow</a></div>   
+            <div class="righty"><a href="slideshow.php">Manage Homepage Slideshow</a></div>   
             
         </div>
     </body>
