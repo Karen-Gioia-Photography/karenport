@@ -24,14 +24,20 @@ img{
 
 .lefty{
     float:left;
-    clear:left;
+    clear:both;
 }
 .righty{
     float:right;
-    clear:right;
+    clear:both;
 }
 .clefairy{
     clear:both;
+}
+.charmander{
+    clear:none;
+}
+#warnbox{
+    background-color: #FFC;
 }
 
 
@@ -39,6 +45,12 @@ img{
     font-size: 42px;
     text-align: right;
     padding: 42px 0px;
+}
+
+.headline{
+    font-size: 18px;
+    padding: 12px 0px;
+    clear: both;
 }
 
 #galleries{
@@ -92,3 +104,27 @@ img{
     height: 12pt;
 }
 
+.hpphoto{
+    width: 314px;
+    margin: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.hpphoto.out img:hover{
+    background-color: lightgreen;
+}
+
+.hpphoto.in img:hover{
+    background-color: lightcoral;
+}
+
+.hpphoto img{
+    width: 300px;
+    border: 1px solid #333;
+    padding: 6px;
+}
+
+.hpphoto input{
+    width: 42px;
+}

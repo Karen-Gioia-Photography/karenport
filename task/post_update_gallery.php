@@ -35,7 +35,7 @@
                             echo "Could not Find Gallery.";
                         }
                         echo "</div>";
-                        echo "<div class='righty'><a href='/admin/galleries.php>Back to Galleries</a>";
+                        echo "<div class='righty'><a href='/admin/galleries.php'>Back to Galleries</a>";
                     }
                 ?>
             </div>

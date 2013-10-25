@@ -35,18 +35,22 @@ class Gallery extends ModelBase {
         if( isset($homepage_position) ){
             $this->homepage_position = $homepage_position;
         }
-        $this.save();
+        $this->save();
     }
     
     protected function save(){
+        $homepage_position = ($this->homepage_position ? $this->homepage_position : ' null ');
         if( isset($this->id) ){
-            parent::query("update galleries set name='".$this->name."', description='".$this->description."', homepage_position=".$this->homepage_position." where id=".$this->id);
+            parent::query("update galleries set name='".$this->name."', description='".$this->description."', homepage_position=".$homepage_position." where id=".$this->id);
         } else {
             parent::query("insert into galleries (name, description, homepage_position) values ('".$this->name."', '".$this->description."', ".$this->homepage_position.")");
         }
     }
     
     public function delete() {
+        foreach( $this->getPhotos() as $photo ){
+            $photo->delete();
+        }
         parent::query("delete from galleries where id=".$this->id);
     }
     

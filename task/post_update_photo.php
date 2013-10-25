@@ -29,7 +29,7 @@
                         $photo = Photo::find($_POST['id']);
                         echo "<div class='lefty'>";
                         if( $photo ){
-                            $photo->update($_POST['name'], $_POST['position'], null);
+                            $photo->update($_POST['name'], $_POST['position']);
                             header("Location: /admin/gallery.php?id=".$_POST['gallery'], true, 303);
                             die();
                         } else {
