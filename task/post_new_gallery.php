@@ -26,8 +26,8 @@
 
                 if( $valid ){
                     $gallery = Gallery::create( $_POST['name'], $_POST['description'], intval($_POST['position']) );
-                    header('Location: /admin/galleries.php', true, 303);
-                    die();
+                    //header('Location: /admin/galleries.php', true, 303);
+                    //die();
                 } else {
                      echo "<div class='righty'><a href='/admin/galleries.php>Back to Galleries</a>";
                 }

@@ -1,4 +1,4 @@
-var Reel = function( container, images, options ){
+var Reel = function( container, image_paths, gallery_paths, options ){
     
     this.window = document.createElement("div");
     this.window.className = "window";
@@ -13,10 +13,10 @@ var Reel = function( container, images, options ){
         
     this.nav = document.createElement("div");
     this.nav.className = "nav";
-    var navWidth = images.length*56;
+    var navWidth = image_paths.length*56;
     this.nav.style.minWidth = navWidth + "px";
-    this.maxNav = navWidth - 640;
-    if( options.thumbnails && navWidth > 640 ){
+    this.maxNav = navWidth - 740;
+    if( options.thumbnails && navWidth > 740 ){
         var navLeft = document.createElement("div");
         navLeft.className = "navArrow left";
         navLeft.innerHTML = "&#9664;";
@@ -42,10 +42,11 @@ var Reel = function( container, images, options ){
     };
     var numImages = 0;
     this.navNodes = [];
-    for( var ix in images ){
+    for( var ix in image_paths ){
         var imgSlideimg = document.createElement("img");
-        imgSlideimg.src = images[ix];
-        var imgSlideEl = document.createElement("div");
+        imgSlideimg.src = image_paths[ix];
+        var imgSlideEl = document.createElement("a");
+        imgSlideEl.href = gallery_paths[ix];
         imgSlideEl.className = "slide";
         imgSlideEl.appendChild(imgSlideimg);
         this.images.appendChild(imgSlideEl);
@@ -54,13 +55,13 @@ var Reel = function( container, images, options ){
         var navNode = document.createElement("span");
         if( options.thumbnails ){
             navNode.className = "navThumb";
-            navNode.innerHTML = "<img src='"+images[ix]+"'/>";
+            navNode.innerHTML = "<img src='"+image_paths[ix]+"'/>";
         } else {
             navNode.className = "navNode";
             navNode.innerHTML = "&#9679;";
         }
         navNode.onclick = createNavClickHandler( this, ix );
-        navNode.style.opacity = (ix===0 ? "1" : "0.5");
+        navNode.style.opacity = (ix===0 ? "1" : "0.4");
         this.nav.appendChild(navNode);
         this.navNodes.push(navNode);
         
@@ -69,7 +70,7 @@ var Reel = function( container, images, options ){
     
     
     
-    this.images.style.minWidth = 700*numImages+"px";
+    this.images.style.minWidth = 800*numImages+"px";
     this.images.style.left = "0px";
     this.window.appendChild(this.images);
     
@@ -105,31 +106,23 @@ Reel.prototype.advance = function(slide){
 };
 
 
-Reel.prototype.incrementChunk = 20;
+Reel.prototype.incrementChunk = 30;
 
 Reel.prototype.advanceFrame = function(){
-    var imagesTarget = -this.currentSlide*700;
+    var imagesTarget = -this.currentSlide*800;
     var imagesCurrent = parseInt(this.images.style.left);
     var imagesSignedDifference = imagesTarget - imagesCurrent;
     var imagesDifference = Math.abs(imagesSignedDifference);
     
-    if( imagesDifference < 2 ){
+    var incrementer = this.incrementChunk*(imagesDifference/800) + 5;
+    if( incrementer > imagesDifference ){
         this.images.style.left = imagesTarget + "px";
         window.clearInterval( this.advancementInterval );
         this.resumeAutoplay();
+    } else if( imagesSignedDifference > 0 ){
+        this.images.style.left = imagesCurrent + incrementer + "px";
     } else {
-        var incrementer = 0;
-        if( imagesDifference > 350 ){ // springy
-            incrementer = this.incrementChunk*(imagesDifference/700);
-        } else { // slower than springy
-            incrementer = this.incrementChunk*(imagesDifference/300);
-        }
-        
-        if( imagesSignedDifference > 0 ){
-            this.images.style.left = imagesCurrent + incrementer + 3 + "px";
-        } else {
-            this.images.style.left = imagesCurrent - incrementer - 3 + "px";
-        }
+        this.images.style.left = imagesCurrent - incrementer + "px";
     }
 };
 
@@ -146,10 +139,7 @@ Reel.prototype.slideNavFrame = function(){
     var slideSignedDifference = this.currentNav - slideCurrent;
     var slideDifference = Math.abs(slideSignedDifference);
 
-    if( slideDifference < 2 ){
-        this.images.style.left = this.currentNav + "px";
-        window.clearInterval( this.navInterval );
-    } else if( slideCurrent < -this.maxNav ){
+    if( slideCurrent < -this.maxNav ){
         this.nav.style.left = -this.maxNav+"px";
         this.currentNav = -this.maxNav;
         window.clearInterval( this.navInterval );
@@ -159,16 +149,14 @@ Reel.prototype.slideNavFrame = function(){
         window.clearInterval( this.navInterval );
     } else {
         var incrementer = 0;
-        if( slideDifference > 200 ){
-            incrementer = this.incrementChunk*(slideDifference/200);
-        } else { // slower than linear
-            incrementer = this.incrementChunk*(slideDifference/100);
-        }
-        
-        if( slideSignedDifference > 0 ){
-            this.nav.style.left = slideCurrent + incrementer + 3 + "px";
+        incrementer = this.incrementChunk*(slideDifference/200) + 5;
+        if( incrementer > slideDifference ){
+            this.images.style.left = this.currentNav + "px";
+            window.clearInterval( this.navInterval );
+        } else if( slideSignedDifference > 0 ){
+            this.nav.style.left = slideCurrent + incrementer + "px";
         } else {
-            this.nav.style.left = slideCurrent - incrementer - 3 + "px";
+            this.nav.style.left = slideCurrent - incrementer + "px";
         }
     }
 };

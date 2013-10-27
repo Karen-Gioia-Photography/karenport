@@ -41,9 +41,9 @@ class Gallery extends ModelBase {
     protected function save(){
         $homepage_position = ($this->homepage_position ? $this->homepage_position : ' null ');
         if( isset($this->id) ){
-            parent::query("update galleries set name='".$this->name."', description='".$this->description."', homepage_position=".$homepage_position." where id=".$this->id);
+            parent::query("update galleries set name='".parent::escape($this->name)."', description='".parent::escape($this->description)."', homepage_position=".$homepage_position." where id=".$this->id);
         } else {
-            parent::query("insert into galleries (name, description, homepage_position) values ('".$this->name."', '".$this->description."', ".$this->homepage_position.")");
+            parent::query("insert into galleries (name, description, homepage_position) values ('".parent::escape($this->name)."', '".parent::escape($this->description)."', ".$this->homepage_position.")");
         }
     }
     

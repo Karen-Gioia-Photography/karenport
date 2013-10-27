@@ -53,9 +53,9 @@ class Photo extends ModelBase {
     protected function save(){
         $homepage_position = ($this->homepage_position ? $this->homepage_position : ' null ');
         if( isset($this->id) ){
-            parent::query("update photos set name='".$this->name."', path='".$this->path."', gallery_id=".$this->gallery_id.", gallery_position=".$this->gallery_position.", homepage_position=".$homepage_position." where id=".$this->id);
+            parent::query("update photos set name='".parent::escape($this->name)."', path='".$this->path."', gallery_id=".$this->gallery_id.", gallery_position=".$this->gallery_position.", homepage_position=".$homepage_position." where id=".$this->id);
         } else {
-            parent::query("insert into photos (name, path, gallery_id, gallery_position, homepage_position) values ('".$this->name."', '".$this->path."', ".$this->gallery_id.", ".$this->gallery_position.", ".$homepage_position.")");
+            parent::query("insert into photos (name, path, gallery_id, gallery_position, homepage_position) values ('".parent::escape($this->name)."', '".$this->path."', ".$this->gallery_id.", ".$this->gallery_position.", ".$homepage_position.")");
         }
     }
     

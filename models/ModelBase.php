@@ -19,6 +19,14 @@ abstract class ModelBase {
     static $connection;
     
     
+	public static function escape($str){
+		if( !isset(self::$connection) ){
+            self::connect();
+        }
+		return mysql_real_escape_string($str);
+	}
+	
+	
     private static function connect(){
         self::$connection = mysql_connect(self::$url, self::$user, self::$password);
         if (!self::$connection) {
