@@ -6,7 +6,183 @@
         Purpose of the stylesheet follows.
 */
 
-root { 
-    display: block;
+body { 
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: #2b2b2b;
+    color: #c4c4c4;
+    font-family: sans-serif; /* change to nobile sans before deployment*/
 }
 
+.ninja{
+    display: none;
+}
+
+.stuckleft{
+    padding: 20px;
+    width: 340px;
+    position: absolute;
+    left:0px;
+    top:0px;
+    bottom:0px;
+}
+
+.content{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 332px;
+    padding: 100px 50px;
+}
+
+.content a{
+    color: deepskyblue;
+    text-decoration: none;
+}
+
+.content a:visited{
+    color: mediumorchid;
+}
+
+#gallery_container{
+    text-align: center;
+    margin: 0px auto;
+}
+
+#gallery_container .window{
+    overflow: hidden;
+    height: 540px;
+    position: relative;
+    width: 700px;
+    margin: 0px auto;
+}
+
+#gallery_container .window .images{
+    overflow: hidden;
+    height: 500px;
+    position: absolute;
+    left: 0px;
+    text-align: left;
+}
+
+#gallery_container .window .images .slide{
+    height: 500px;
+    width: 700px;
+    text-align: center;
+    float: left;
+}
+
+#gallery_container .window .images .slide img{
+    max-height: 500px;
+    max-width: 700px;
+}
+
+#gallery_container .window .navbar{
+    height: 32px;
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+    right: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+
+#gallery_container .window .navbar .nav{
+    height: 32px;
+    text-align: center;
+}
+
+#gallery_container .window .navArrow{
+    position: absolute;
+    width: 20px;
+    height: 32px;
+    line-height: 28px;
+    cursor: pointer;
+    bottom: 0px;
+    background-color: #2b2b2b;
+}
+
+#gallery_container .window .navArrow:hover{
+    color: white;
+}
+
+#gallery_container .window .navArrow.left{
+    left: 0;
+}
+#gallery_container .window .navArrow.right{
+    right: 0;
+}
+
+
+#gallery_container .window .navbar .nav .navNode{
+    width: 10px;
+    height: 10px;
+    margin: 7px;
+    cursor: pointer;
+}
+
+
+#gallery_container .window .navbar .nav .navThumb{
+    width: 40px;
+    height: 30px;
+    margin: 0px 7px;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid #c4c4c4;
+}
+
+#gallery_container .window .navbar .nav .navThumb img{
+    max-width: 40px;
+    max-height: 30px;
+    
+}
+
+
+
+
+
+
+
+#logo img{
+    width: 300px;
+}
+
+#menu{
+    padding: 50px 100px;
+}
+
+.menuItem{
+    margin: 3px;
+}
+
+.menuItem a{
+    font-size: 16px;
+    font-weight: bold;
+    color: #c4c4c4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#portfolio{
+    padding: 0px 16px;
+}
+
+#portfolio .gallery{
+    margin: 3px;
+}
+
+#portfolio .gallery a{
+    font-weight: normal;
+}
+
+
+
+
+#copyrights{
+    position: absolute;
+    bottom: 42px;
+    left: 42px;
+    font-size: 12px;
+}

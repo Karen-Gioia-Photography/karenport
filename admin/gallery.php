@@ -53,7 +53,7 @@
                                 <td><input type="number" name="position" value="<?php echo $photo->gallery_position ?>"/></td>
                                 <td><input type="text"   name="name"     value="<?php echo $photo->name ?>"/></td>
                                 <td><img height="200" src="<?php echo $photo->path ?>"/></td>
-                                <td><button type="submit">Update</button></td>
+                                <td><button type="submit">Update</button><a name="<?php echo $photo->id ?>"></a></td>
                                 <td><a href="/task/get_delete_photo.php?id=<?php echo $photo->id; ?>"><button type="button">Delete</button</a></td>
                             </tr>
                         </form>

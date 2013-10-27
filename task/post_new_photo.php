@@ -34,7 +34,7 @@
                     $new_path = "/photos/".$image_file['name'];
                     if( move_uploaded_file($image_file['tmp_name'], $_SERVER["DOCUMENT_ROOT"].$new_path) ){
                         $photo = Photo::create( $_POST['name'], $new_path, intval($_POST['gallery']),  intval($_POST['position']) );
-                        header("Location: /admin/gallery.php?id=".$_POST['gallery'], true, 303);
+                        header("Location: /admin/gallery.php?id=".$_POST['gallery']."#".$photo->id, true, 303);
                         die();
                     } else {
                         echo "<div>New Photo Creation Failed. You may have already used this file.</div>";

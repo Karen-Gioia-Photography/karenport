@@ -79,6 +79,11 @@ class Photo extends ModelBase {
     static public function create( $name, $path, $gallery_id, $gallery_position ){
         $ret = new self( $name, $path, $gallery_id, $gallery_position, null );
         $ret->save();
+        $rs = parent::query("select id from photos where gallery_id=".$gallery_id." and gallery_position=".$gallery_position);
+        if( $row = mysql_fetch_assoc($rs) ){
+            $ret->id = $row['id'];
+        }
+        return $ret;
     }
     
     static public function find( $id ){

@@ -1,5 +1,5 @@
 <?php
-    require_once "/models/Photo.php";
+    require_once "models/Gallery.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +25,18 @@
                     reel = new Reel(
                         document.getElementById('gallery_container'),
                         <?php 
-                            $photo_paths = array();
-                            foreach(Photo::allForHomepage() as $photo){ array_push($photo_paths, ($photo->path)); }
-                            echo '["'.join('", "',$photo_paths).'"]';
+                            $gallery = Gallery::find($_GET['id']);
+                            if( $gallery ){
+                                $photo_paths = array();
+                                foreach( $gallery->getPhotos() as $photo){ array_push($photo_paths, ($photo->path)); }
+                                echo '["'.join('", "',$photo_paths).'"]';
+                            }
                         ?>,
-                        { autoplay: 3000, thumbnails: false, arrows: false }
+                        { autoplay: 0, thumbnails: true, arrows: true }
                     );
                 }
             });
         </script>
+        
     </body>
 </html>
