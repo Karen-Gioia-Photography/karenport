@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Karen Gioia Photography</title>
-        <link rel="stylesheet" type="text/css" href="/assets/index.css"/>
-        <script type="text/javascript" src="/assets/index.js"></script>
+        <?php require '_headers.php'?>
     </head>
     <body>
         
@@ -28,11 +26,19 @@
                             $gallery = Gallery::find($_GET['id']);
                             if( $gallery ){
                                 $photo_paths = array();
-                                foreach( $gallery->getPhotos() as $photo){ array_push($photo_paths, ($photo->path)); }
+                                $gallery_paths = array();
+                                foreach($gallery->getPhotos() as $photo){ 
+                                    array_push($photo_paths,    $photo->path); 
+                                    array_push($gallery_paths,  "gallery.php?id=".$photo->gallery_id);
+                                }
                                 echo '["'.join('", "',$photo_paths).'"]';
+                                echo ',';
+                                echo '["'.join('", "',$gallery_paths).'"]';
+                            } else {
+                                echo '[],[]';
                             }
                         ?>,
-                        { autoplay: 0, thumbnails: true, arrows: true }
+                          { autoplay: 0, thumbnails: true, arrows: true, linkingImages: false }
                     );
                 }
             });

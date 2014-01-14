@@ -56,7 +56,7 @@ class Gallery extends ModelBase {
     
         
     public function getPhotos(){
-        $rs = parent::query("select * from photos where gallery_id =".$this->id);
+        $rs = parent::query("select * from photos where gallery_id =".$this->id." order by gallery_position asc");
         $ret = array();
         while( $row = mysql_fetch_assoc($rs) ){
             $newimg = new Photo( $row['name'], $row['path'], $row['gallery_id'], $row['gallery_position'], $row['homepage_position'] );
@@ -76,6 +76,12 @@ class Gallery extends ModelBase {
     static public function create( $name, $description, $homepage_position ){
         $ret = new self( $name, $description, $homepage_position );
         $ret->save();
+        $rs = parent::query("select id from galleries where name='".$name."'");
+        $row = mysql_fetch_assoc($rs);
+        if( $row ){
+            $ret->id = intval($row['id']);
+        }
+        return $ret;
     }
     
     static public function find( $id ){

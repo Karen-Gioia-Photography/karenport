@@ -1,5 +1,8 @@
 var Reel = function( container, image_paths, gallery_paths, options ){
     
+    this.unit = document.createElement("div");
+    this.unit.id = "unit";
+    
     this.window = document.createElement("div");
     this.window.className = "window";
     
@@ -7,26 +10,53 @@ var Reel = function( container, image_paths, gallery_paths, options ){
     this.images.className = "images";
         
         
-    var createArrowClickHandler = function(ctx, amount){
+    var createNavArrowClickHandler = function(ctx, amount){
         return function(){ ctx.slideNav(amount); };
     };    
+    var createPhotoArrowClickHandler = function(ctx, actionForward){
+        if( actionForward ){
+            return function(){ ctx.forward(); };
+        } else {
+            return function(){ ctx.backward(); };
+        }
+    };
+    
+
         
     this.nav = document.createElement("div");
     this.nav.className = "nav";
-    var navWidth = image_paths.length*56;
+    var navWidth = (image_paths.length*(this.thumbnailWidth+this.ditchWidth))-this.ditchWidth;
     this.nav.style.minWidth = navWidth + "px";
     this.maxNav = navWidth - 740;
+    
     if( options.thumbnails && navWidth > 740 ){
-        var navLeft = document.createElement("div");
-        navLeft.className = "navArrow left";
-        navLeft.innerHTML = "&#9664;";
-        navLeft.onclick = createArrowClickHandler(this, 200);
-        this.window.appendChild(navLeft);
-        var navRight = document.createElement("div");
-        navRight.className = "navArrow right";
-        navRight.innerHTML = "&#9654;";
-        navRight.onclick = createArrowClickHandler(this, -200);
-        this.window.appendChild(navRight);
+        // left side
+        this.leftbox = document.createElement("div");
+        this.leftbox.className = "arrowbox left";
+        var photoArrowLeft = document.createElement("div");
+        photoArrowLeft.className = "photoArrow left";
+        photoArrowLeft.onclick = createPhotoArrowClickHandler(this, false);
+        this.leftbox.appendChild(photoArrowLeft);
+        var navArrowLeft = document.createElement("div");
+        navArrowLeft.className = "navArrow left";
+        navArrowLeft.innerHTML = "&#9664;";
+        navArrowLeft.onclick = createNavArrowClickHandler(this, 200);
+        this.leftbox.appendChild(navArrowLeft);
+        
+        // right side
+        this.rightbox = document.createElement("div");
+        this.rightbox.className = "arrowbox right";
+        var photoArrowRight = document.createElement("div");
+        photoArrowRight.className = "photoArrow right";
+        photoArrowRight.onclick = createPhotoArrowClickHandler(this, true);
+        this.rightbox.appendChild(photoArrowRight);
+        var navArrowRight = document.createElement("div");
+        navArrowRight.className = "navArrow right";
+        navArrowRight.innerHTML = "&#9654;";
+        navArrowRight.onclick = createNavArrowClickHandler(this, -200);
+        this.rightbox.appendChild(navArrowRight);
+        
+        // align or something
         this.nav.style.left = "0px";
         this.nav.style.position = "absolute";
     } else {
@@ -37,7 +67,7 @@ var Reel = function( container, image_paths, gallery_paths, options ){
     navbar.appendChild(this.nav);
     this.window.appendChild(navbar);
     
-    var createNavClickHandler = function(ctx, idx){
+    var createNavArrowClickHandler = function(ctx, idx){
         return function(){ ctx.advance(idx); };
     };
     var numImages = 0;
@@ -45,8 +75,13 @@ var Reel = function( container, image_paths, gallery_paths, options ){
     for( var ix in image_paths ){
         var imgSlideimg = document.createElement("img");
         imgSlideimg.src = image_paths[ix];
-        var imgSlideEl = document.createElement("a");
-        imgSlideEl.href = gallery_paths[ix];
+        var imgSlideEl;
+        if( options.linkingImages ){ 
+          imgSlideEl = document.createElement("a");
+          imgSlideEl.href = gallery_paths[ix];
+        } else{
+          imgSlideEl = document.createElement("span");    
+        }
         imgSlideEl.className = "slide";
         imgSlideEl.appendChild(imgSlideimg);
         this.images.appendChild(imgSlideEl);
@@ -60,30 +95,49 @@ var Reel = function( container, image_paths, gallery_paths, options ){
             navNode.className = "navNode";
             navNode.innerHTML = "&#9679;";
         }
-        navNode.onclick = createNavClickHandler( this, ix );
+        navNode.onclick = createNavArrowClickHandler( this, ix );
         navNode.style.opacity = (ix===0 ? "1" : "0.4");
         this.nav.appendChild(navNode);
         this.navNodes.push(navNode);
-        
+ 
+        if( ix < image_paths.length-1 ){
+            var ditch = document.createElement("span");
+            ditch.className = "navDitch";
+            this.nav.appendChild(ditch);
+        }
+      
         numImages++;
     }
-    
-    
-    
+  
+  
+
     this.images.style.minWidth = 800*numImages+"px";
     this.images.style.left = "0px";
     this.window.appendChild(this.images);
-    
-    container.appendChild(this.window);
+  
+    if( this.leftbox ){ 
+      this.unit.appendChild(this.leftbox);
+    }
+    this.unit.appendChild(this.window);
+    if( this.rightbox ){ 
+      this.unit.appendChild(this.rightbox);
+    }
+  
+    container.appendChild(this.unit);
     
     this.currentSlide = 0;
     this.currentNav = 0;
     this.totalSlides = numImages;
     this.autoplay = options.autoplay;
+    this.thumbnails = options.thumbnails;
     this.resumeAutoplay();
 };
 
 Reel.prototype.defaultOptions = { autoplay: 0, thumbnails: true, arrows: true };
+
+Reel.prototype.thumbnailWidth = 40;
+Reel.prototype.ditchWidth = 14;
+
 
 Reel.prototype.forward = function(){
     var nextSlide = this.currentSlide+1;
@@ -94,11 +148,25 @@ Reel.prototype.forward = function(){
     }
 };
 
+Reel.prototype.backward = function(){
+    var previousSlide = this.currentSlide-1;
+    if( previousSlide < 0 ){
+        this.advance(this.totalSlides-1);
+    } else {
+        this.advance(previousSlide);
+    }
+};
+
 Reel.prototype.advance = function(slide){
     console.log(slide);
     this.navNodes[this.currentSlide].style.opacity = 0.5;
     this.navNodes[slide].style.opacity = 1;
     
+    var nodeOffset = slide*(this.thumbnailWidth+this.ditchWidth) + parseInt(this.currentNav);
+    if( nodeOffset < 0 || nodeOffset > 700 ){
+        this.slideNav(-(nodeOffset-200));
+    }
+  
     this.currentSlide = slide;
     var self = this;
     window.clearInterval(this.advancementInterval);
@@ -151,7 +219,7 @@ Reel.prototype.slideNavFrame = function(){
         var incrementer = 0;
         incrementer = this.incrementChunk*(slideDifference/200) + 5;
         if( incrementer > slideDifference ){
-            this.images.style.left = this.currentNav + "px";
+            this.nav.style.left = this.currentNav + "px";
             window.clearInterval( this.navInterval );
         } else if( slideSignedDifference > 0 ){
             this.nav.style.left = slideCurrent + incrementer + "px";

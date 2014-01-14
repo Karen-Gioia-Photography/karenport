@@ -12,9 +12,9 @@
  */
 abstract class ModelBase {
     
-    static $url = 'localhost';
-    static $user = 'unroot';
-    static $password = 'unroot';
+    static $url = 'mysql.karengioia.com';
+    static $user = 'karengioia';
+    static $password = 'marie388';
     static $db = 'karenport';
     static $connection;
     

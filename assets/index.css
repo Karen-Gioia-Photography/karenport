@@ -8,18 +8,18 @@
 
 @font-face {
     font-family: "Nobile";
-    src: url("/assets/fonts/nobile-webfont.eot"),
-         url("/assets/fonts/nobile-webfont.ttf") format('truetype'),
-         url("/assets/fonts/nobile-webfont.woff") format('woff'),
-         url("/assets/fonts/nobile-webfont.svg") format('svg')
+    src: url("fonts/nobile-webfont.eot"),
+         url("fonts/nobile-webfont.ttf") format('truetype'),
+         url("fonts/nobile-webfont.woff") format('woff'),
+         url("fonts/nobile-webfont.svg") format('svg')
          ;
 }
 @font-face {
     font-family: "Nobile";
-    src: url("/assets/fonts/nobile_bold-webfont.eot"),
-         url("/assets/fonts/nobile_bold-webfont.ttf") format('truetype'),
-         url("/assets/fonts/nobile_bold-webfont.ttf") format('woff'),
-         url("/assets/fonts/nobile_bold-webfont.ttf") format('svg')
+    src: url("fonts/nobile_bold-webfont.eot"),
+         url("fonts/nobile_bold-webfont.ttf") format('truetype'),
+         url("fonts/nobile_bold-webfont.ttf") format('woff'),
+         url("fonts/nobile_bold-webfont.ttf") format('svg')
          ;
     font-weight: bold;
 }
@@ -53,7 +53,7 @@ body {
     bottom: 0px;
     right: 0px;
     left: 332px;
-    padding: 64px;
+    padding: 128px 40px;
 }
 
 .content a{
@@ -62,7 +62,17 @@ body {
 }
 
 .content a:visited{
-    color: mediumorchid;
+    color: deepskyblue;
+}
+
+.content h1{
+    margin: 0px 0px 20px 0px;
+    font-weight: normal;
+}
+
+.content p{
+    font-size: 16px;
+    line-height: 20px; 
 }
 
 #gallery_container{
@@ -70,12 +80,18 @@ body {
     margin: 0px auto;
 }
 
+#gallery_container #unit{
+    display:inline-block;
+    width: 920px;
+}
+
+
 #gallery_container .window{
     overflow: hidden;
     height: 640px;
     position: relative;
     width: 800px;
-    margin: 0px auto;
+    float: left;
 }
 
 #gallery_container .window .images{
@@ -88,7 +104,7 @@ body {
 
 #gallery_container .window .images .slide{
     height: 600px;
-	line-height: 600px;
+  line-height: 600px;
     width: 800px;
     text-align: center;
     vertical-align: middle;
@@ -105,8 +121,8 @@ body {
     height: 32px;
     position: absolute;
     bottom: 0px;
-    left: 30px;
-    right: 30px;
+    left: 0px;
+    right: 0px;
     text-align: center;
     overflow: hidden;
 }
@@ -116,25 +132,42 @@ body {
     text-align: center;
 }
 
-#gallery_container .window .navArrow{
-    position: absolute;
-    width: 20px;
-    height: 32px;
-    line-height: 28px;
+
+#gallery_container .arrowbox{
+    height: 640px;
+    line-height: 640px;
+    width: 60px;
     cursor: pointer;
-    bottom: 0px;
-    background-color: #2b2b2b;
+    float: left;
 }
 
-#gallery_container .window .navArrow:hover{
+#gallery_container .arrowbox .photoArrow{
+    height: 600px;
+    line-height: 600px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position-y: 271px;
+}
+
+#gallery_container .arrowbox .photoArrow.left{
+    background-image: url('tryagain.png');
+    background-position-x: 20px;
+}
+
+#gallery_container .arrowbox .photoArrow.right{
+    background-image: url('othersidetryagain.png');
+    background-position-x: 20px;
+}
+
+
+#gallery_container .arrowbox .navArrow{
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+#gallery_container .arrowbox .navArrow:hover, #gallery_container .arrowbox .photoArrow:hover{
     color: white;
-}
-
-#gallery_container .window .navArrow.left{
-    left: 0;
-}
-#gallery_container .window .navArrow.right{
-    right: 0;
 }
 
 
@@ -149,12 +182,18 @@ body {
 #gallery_container .window .navbar .nav .navThumb{
     width: 40px;
     height: 30px;
-	line-height: 30px;
-    margin: 0px 7px;
+    line-height: 30px;
     cursor: pointer;
     display: inline-block;
     border: 1px solid #c4c4c4;
-	vertical-align: top;
+    vertical-align: top;
+}
+
+#gallery_container .window .navbar .nav .navDitch{
+    width: 14px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #gallery_container .window .navbar .nav .navThumb img{
@@ -174,11 +213,11 @@ body {
 }
 
 #menu{
-    padding: 50px 100px;
+    padding: 50px 50px 50px 100px;
 }
 
 .menuItem{
-    margin: 3px;
+    margin: 8px;
 }
 
 .menuItem a{
@@ -194,7 +233,7 @@ body {
 }
 
 #portfolio .gallery{
-    margin: 3px;
+    margin: 8px;
 }
 
 #portfolio .gallery a{

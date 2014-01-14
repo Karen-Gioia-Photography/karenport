@@ -1,22 +1,21 @@
 <?php 
+    ob_start();
     require_once '../models/Photo.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Homepage Slideshow</title>
-        <link rel="stylesheet" type="text/css" href="/assets/admin.css"/>
+      <?php require '_headers.php' ?>
     </head>
     <body>
 
         <div id="main">
         <div class="header">Homepage Slideshow</div>
         
-        <div class="righty"><a href="/admin">Admin Home</a></div>
+        <div class="righty"><a href=".">Admin Home</a></div>
         <div id="warnbox" class="clefairy"></div>
         
-        <form method="POST" name="slideshow_form" action="/task/post_slideshow.php" onsubmit="return validateSlideshow();">
+          <form method="POST" name="slideshow_form" action="task/post_slideshow.php" onsubmit="return validateSlideshow();">
             <div id="slideshow_photos">
                 <div class="headline">
                     Current Slideshow &nbsp;&nbsp;
@@ -26,7 +25,7 @@
                 <?php
                     foreach( Photo::allForHomepage() as $hpphoto ){
                         echo '<div class="lefty charmander hpphoto in">';
-                        echo "  <img src='".$hpphoto->path."'  onclick='removeFromSlideshow(this);'/>";
+                      echo "  <img src='../".$hpphoto->path."'  onclick='removeFromSlideshow(this);'/>";
                         echo "  <input type='hidden' class='id' name='id[]' value='".$hpphoto->id."'/>";
                         echo "  <input type='number' class='position' name='position[]' value='".$hpphoto->homepage_position."'/>";
                         echo "  <span>".$hpphoto->name."</span>";
@@ -43,7 +42,7 @@
             <?php
                 foreach( Photo::allNotForHomepage() as $hpphoto ){
                     echo '<div class="lefty charmander hpphoto out">';
-                    echo "  <img src='".$hpphoto->path."' onclick='addToSlideshow(this);'/>";
+                  echo "  <img src='../".$hpphoto->path."' onclick='addToSlideshow(this);'/>";
                     echo "  <input type='hidden' class='id' name='id[]' value='".$hpphoto->id."'/>";
                     echo "  <input type='number' class='position' name='position[]' value='".$hpphoto->homepage_position."'/>";
                     echo "  <span>".$hpphoto->name."</span>";

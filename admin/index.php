@@ -1,8 +1,7 @@
+<?php ob_start(); ?>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Karen Gioia Admin</title>
-        <link rel="stylesheet" type="text/css" href="/assets/admin.css"/>
+      <?php require '_headers.php' ?>
     </head>
     <body>
         <div id="main">

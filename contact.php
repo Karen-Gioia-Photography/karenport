@@ -5,10 +5,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Karen Gioia Photography</title>
-        <link rel="stylesheet" type="text/css" href="/assets/index.css"/>
-        <script type="text/javascript" src="/assets/index.js"></script>
+        <?php require '_headers.php'?>
     </head>
     <body>
         

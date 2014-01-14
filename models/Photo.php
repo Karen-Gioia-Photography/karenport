@@ -60,13 +60,8 @@ class Photo extends ModelBase {
     }
     
     public function delete() {
-        $path =  $_SERVER["DOCUMENT_ROOT"].$this->path;
-        if( unlink($path) ){
-            parent::query("delete from photos where id=".$this->id);
-            $this->id = null;
-        } else {
-           trigger_error('Unable to delete photo file. Photo was not deleted.');
-        }
+        parent::query("delete from photos where id=".$this->id);
+        $this->id = null;
     }
     
 

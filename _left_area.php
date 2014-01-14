@@ -4,12 +4,12 @@
 
 <div class="stuckleft">
     <div id='logo'>
-        <img src="/assets/logoandname.png"/>
+      <a href="."><img src="assets/logoandname.png"/></a>
     </div>
     
     <div id="menu">
         <div id='home_item' class='menuItem'>
-            <a href="/">Home</a>
+            <a href=".">Home</a>
         </div>
         
         <?php 
@@ -44,16 +44,25 @@
         </div>
         
         <div id='about_item' class='menuItem'>
-            <a href="/about.php">About Me</a>
+            <a href="about.php">About Me</a>
         </div>
         
         <div id='contact_item' class='menuItem'>
-            <a href="/contact.php">Contact</a>
+            <a href="contact.php">Contact</a>
         </div>
+      
+        <?php
+             if( array_key_exists('password', $_COOKIE) && $_COOKIE['password'] == '3888cwrU' ){
+                echo "<div id='admin_item' class='menuItem'>";
+               echo "  <a href='admin' style='color:#d8d;'>Admin</a>";
+                echo "</div>";
+             }
+        ?>
+
     </div>
     
     <div id="copyrights">
-        &#169; 2013 Karen Gioia Photography
+        &#169; 2014 Karen Gioia Photography
     </div>
    
 </div>
