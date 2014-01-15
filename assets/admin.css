@@ -84,8 +84,42 @@ img{
     background-color: lightpink;
 }
 
+#galleries .gallery select{
+	height: 24px;
+	margin: 2px;
+	padding: 3px;
+}
+#galleries .gallery input, #galleries .gallery textarea{
+	height: 16px;
+	margin: 2px;
+	padding: 3px;
+}
+
+#galleries .gallery .linkdesc textarea{
+	height: 179px;
+	margin: 5px;
+	width: 314px;
+	font-family: sans-serif;
+}
+#galleries .gallery .linkdesc input{
+	width: 320px;
+}
+
+
+#galleries .gallery .nameimag input{
+	width: 270px;
+}
+#galleries .gallery .nameimag img{
+	margin: 5px;
+	width: 270px;
+}
+
+
+
+
+
 #galleries textarea{
-    width: 420px;
+    width: 360px;
 }
 
 #galleries input[name="position"]{
@@ -94,6 +128,12 @@ img{
 
 #galleries div{
     background-color: #EEE;
+}
+
+#galleries td .viewImages{
+	width: 120px;
+	display: block;
+	line-height: 24px;
 }
 
 #galleries textarea, #galleries input, #galleries div{

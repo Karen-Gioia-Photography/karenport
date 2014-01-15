@@ -17,7 +17,7 @@
             <div>
             <?php
                 $valid = true;
-                $validation_keys = array("name","description","position");
+                $validation_keys = array("name","description","layout","position");
                 foreach( $validation_keys as $validation ){
                     if( !array_key_exists($validation, $_POST) ){
                         echo ("<div class='lefty'>Must supply ".$validation."</div>");
@@ -26,7 +26,7 @@
                 }
 
                 if( $valid ){
-                    $gallery = Gallery::create( $_POST['name'], $_POST['description'], intval($_POST['position']) );
+                    $gallery = Gallery::create( $_POST['name'], $_POST['description'], $_POST['layout'], intval($_POST['position']) );
                     if( $gallery ){
                         $gallery_path_relative = "photos/".$gallery->description;
                         $gallery_path_absolute = $_SERVER["DOCUMENT_ROOT"]."/".$gallery_path_relative;
@@ -34,7 +34,8 @@
                             $photo_paths = scandir($gallery_path_absolute);
                             $ii = 0;
                             foreach( $photo_paths as $photo ){
-                              if( stripos(strrev($photo), 'gpj') === 0 ){ 
+							  $revpath = strrev($photo);
+                              if( (stripos($revpath, 'gpj') === 0) || (stripos($revpath, 'gnp') === 0) ){ 
                                 $photoname = substr($photo, 0, -4);
                                 Photo::create( $photoname, $gallery_path_relative."/".$photo, $gallery->id, $ii );
                                 $ii+=5;
@@ -43,7 +44,7 @@
                             header("Location: ../gallery.php?id=".$gallery->id, true, 303);
                             die();
                         } else {
-                            echo ("<div class='lefty'>Couldn't find Directory ".$gallery_path."</div>");
+                            echo ("<div class='lefty'>Couldn't find Directory ".$gallery_path_absolute."</div>");
                         }
                     } else {
                         echo ("<div class='lefty'>Couldn't create gallery</div>");

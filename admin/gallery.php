@@ -33,8 +33,8 @@
                     <thead>
                         <tr>
                             <th>Position</th>
-                            <th>Name</th>
-                            <th>Image</th>
+                            <th>Name & Image</th>
+                            <th>Link & Description</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -51,21 +51,33 @@
                             <tr class="gallery <?php echo ($photo->gallery_position % 2) ? "even" : "odd" ?>">
                                 <?php if( $photo->gallery_position > $max_gal_position ){ $max_gal_position = $photo->gallery_position; }  ?>
                                 <td><input type="number" name="position" value="<?php echo $photo->gallery_position ?>"/></td>
-                                <td><input type="text"   name="name"     value="<?php echo $photo->name ?>"/></td>
-                                <td><img height="200" src="<?php echo "../".$photo->path ?>"/></td>
+                                <td class="nameimag">
+									<input type="text"   name="name"     value="<?php echo $photo->name ?>"/>
+									<img src="<?php echo "../".$photo->path ?>"/>
+								</td>
+                                <td class="linkdesc">
+									<input type="text" name="link" value="<?php echo htmlspecialchars($photo->link) ?>"></input>
+									<textarea name="description"><?php echo htmlspecialchars($photo->description) ?></textarea>
+								</td>
                                 <td><button type="submit">Update</button><a name="<?php echo $photo->id ?>"></a></td>
                               <td><a href="task/get_delete_photo.php?id=<?php echo $photo->id; ?>"><button type="button">Delete</button</a></td>
                             </tr>
                         </form>
                         <?php endforeach; ?>
 
-                                  <form action="task/post_new_photo.php" method="post" enctype="multipart/form-data">
+						<form action="task/post_new_photo.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="gallery" value="<?php echo $gallery->id ?>"/>
                             <tr class="new gallery">
                                 <?php $new_gal_position = $max_gal_position + 5; ?>
-                                <td><input type="hidden"  name="position" value="<?php echo $new_gal_position ?>"></input><div><?php echo $new_gal_position ?></div></td>
-                                <td><input type="text"    name="name"   value="New Image"></input></td>
-                                <td><input type="text"    name="image_file" value="File Name"></input></td>
+                                <td><input type="text" readonly="readonly" name="position" value="<?php echo $new_gal_position ?>"></input></td>
+                                <td class="nameimag">
+									<input type="text"    name="name"   value="New Image"></input>
+									<input type="text"    name="image_file" value="File Name"></input>
+								</td>
+                                <td class="linkdesc">
+									<input type="text"	  name="link" value="Link"></input>
+									<textarea name="description">Description</textarea>	
+								</td>
                                 <td><button type="submit">Create</button></td>
                                 <td></td>
                             </tr>

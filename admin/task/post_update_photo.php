@@ -18,7 +18,7 @@
             <div>
                 <?php
                     $valid = true;
-                    $validation_keys = array("id", "name", "position", "gallery");
+                    $validation_keys = array("id", "name", "position", "gallery", "description", "link");
                     foreach( $validation_keys as $validation ){
                         if( !array_key_exists($validation, $_POST) ){
                             echo ("<div>Must supply ".$validation."</div>");
@@ -30,7 +30,7 @@
                         $photo = Photo::find($_POST['id']);
                         echo "<div class='lefty'>";
                         if( $photo ){
-                            $photo->update($_POST['name'], $_POST['position']);
+                            $photo->update($_POST['name'], $_POST['position'], $_POST['description'], $_POST['link']);
                             header("Location: ../gallery.php?id=".$_POST['gallery'], true, 303);
                             die();
                         } else {

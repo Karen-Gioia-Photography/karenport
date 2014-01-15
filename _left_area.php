@@ -34,7 +34,7 @@
                         }
 
                         echo '<div class="gallery">';
-                        echo '  <a href="gallery.php?id='.$gallery->id.'">';
+                        echo '  <a href="'.$gallery->layout.'.php?id='.$gallery->id.'">';
                         echo      $gallery->name.'&nbsp;'.$gallery_suffix;
                         echo '  </a>';
                         echo '</div>';

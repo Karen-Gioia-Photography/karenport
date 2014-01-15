@@ -17,7 +17,7 @@
             <div class="lefty">
                 <?php
                     $valid = true;
-                    $validation_keys = array("id", "name", "description", "position");
+                    $validation_keys = array("id", "name", "description", "layout", "position");
                     foreach( $validation_keys as $validation ){
                         if( !array_key_exists($validation, $_POST) ){
                             echo ("<div>Must supply ".$validation."</div>");
@@ -29,7 +29,7 @@
                         $gallery = Gallery::find($_POST['id']);
                         echo "<div class='lefty'>";
                         if( $gallery ){
-                            $gallery->update($_POST['name'], $_POST['description'], $_POST['position']);
+                            $gallery->update($_POST['name'], $_POST['description'], $_POST['layout'], $_POST['position']);
                             header('Location: ../galleries.php', true, 303);
                             die();
                         } else {
