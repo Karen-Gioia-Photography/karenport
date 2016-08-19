@@ -80,7 +80,7 @@ class Gallery extends ModelBase {
     static public function create( $name, $description, $layout, $homepage_position ){
         $ret = new self( $name, $description, $layout, $homepage_position );
         $ret->save();
-        $rs = parent::query("select id from galleries where name='".$name."'");
+        $rs = parent::query("select id from galleries where description='".$description."'");
         $row = mysql_fetch_assoc($rs);
         if( $row ){
             $ret->id = intval($row['id']);
