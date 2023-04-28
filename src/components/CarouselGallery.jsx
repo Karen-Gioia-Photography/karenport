@@ -2,11 +2,13 @@ import { Link } from "preact-router";
 import { useState, useCallback } from "preact/hooks";
 
 const SLIDE_WIDTH = 800;
+const NAV_WIDTH = 40;
 
 const CarouselGallery = ({ images, withThumbs }) => {
   const [slide, setSlide] = useState(0);
+  const [navIdx, setNavIdx] = useState(0);
 
-  const crement = useCallback(
+  const crementSlide = useCallback(
     (idxCrement) => {
       const newIdx = slide + idxCrement;
       if (newIdx >= images.length) {
@@ -20,15 +22,31 @@ const CarouselGallery = ({ images, withThumbs }) => {
     [slide, images]
   );
 
+  const crementNav = useCallback(
+    (idxCrement) => {
+      const newIdx = navIdx + idxCrement;
+      if (newIdx >= images.length) {
+        setNavIdx(0);
+      } else if (newIdx < 0) {
+        setNavIdx(images.length - 1);
+      } else {
+        setNavIdx(newIdx);
+      }
+    },
+    [navIdx, images]
+  );
+
   return (
     <div id="gallery_container">
       <div id="unit">
         <div className="arrowbox left">
-          <div className="photoArrow left" onClick={() => crement(-1)} />
-          <div className="navArrow left">◀</div>
+          <div className="photoArrow left" onClick={() => crementSlide(-1)} />
+          <div className="navArrow left" onClick={() => crementNav(-3)}>
+            ◀
+          </div>
         </div>
         <div className="window">
-          <div className="navbar">
+          <div className="navbar" style={{ left: -navIdx * NAV_WIDTH }}>
             <div className="nav">
               {images.map((image, ix) => {
                 if (withThumbs) {
@@ -77,8 +95,10 @@ const CarouselGallery = ({ images, withThumbs }) => {
           </div>
         </div>
         <div className="arrowbox right">
-          <div className="photoArrow right" onClick={() => crement(1)} />
-          <div className="navArrow right">▶</div>
+          <div className="photoArrow right" onClick={() => crementSlide(1)} />
+          <div className="navArrow right" onClick={() => crementNav(3)}>
+            ▶
+          </div>
         </div>
       </div>
     </div>

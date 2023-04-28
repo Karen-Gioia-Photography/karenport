@@ -218,6 +218,7 @@ body {
     right: 0px;
     text-align: center;
     overflow: hidden;
+    transition: left 0.3s ease;
 }
 
 #gallery_container .window .navbar .nav{
