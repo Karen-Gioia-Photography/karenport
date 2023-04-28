@@ -1,286 +1,236 @@
-var Reel = function( container, image_paths, gallery_paths, options ){
-    
-    this.unit = document.createElement("div");
-    this.unit.id = "unit";
-    
-    this.window = document.createElement("div");
-    this.window.className = "window";
-    
-    this.images = document.createElement("div");
-    this.images.className = "images";
-        
-        
-    var createNavArrowClickHandler = function(ctx, amount){
-        return function(){ ctx.slideNav(amount); };
-    };    
-    var createPhotoArrowClickHandler = function(ctx, actionForward){
-        if( actionForward ){
-            return function(){ ctx.forward(); };
-        } else {
-            return function(){ ctx.backward(); };
-        }
-    };
-    
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
 
-        
-    this.nav = document.createElement("div");
-    this.nav.className = "nav";
-    var navWidth = (image_paths.length*(this.thumbnailWidth+this.ditchWidth))-this.ditchWidth;
-    this.nav.style.minWidth = navWidth + "px";
-    this.maxNav = navWidth - 740;
-    
-    if( options.thumbnails && navWidth > 740 ){
-        // left side
-        this.leftbox = document.createElement("div");
-        this.leftbox.className = "arrowbox left";
-        var photoArrowLeft = document.createElement("div");
-        photoArrowLeft.className = "photoArrow left";
-        photoArrowLeft.onclick = createPhotoArrowClickHandler(this, false);
-        this.leftbox.appendChild(photoArrowLeft);
-        var navArrowLeft = document.createElement("div");
-        navArrowLeft.className = "navArrow left";
-        navArrowLeft.innerHTML = "&#9664;";
-        navArrowLeft.onclick = createNavArrowClickHandler(this, 200);
-        this.leftbox.appendChild(navArrowLeft);
-        
-        // right side
-        this.rightbox = document.createElement("div");
-        this.rightbox.className = "arrowbox right";
-        var photoArrowRight = document.createElement("div");
-        photoArrowRight.className = "photoArrow right";
-        photoArrowRight.onclick = createPhotoArrowClickHandler(this, true);
-        this.rightbox.appendChild(photoArrowRight);
-        var navArrowRight = document.createElement("div");
-        navArrowRight.className = "navArrow right";
-        navArrowRight.innerHTML = "&#9654;";
-        navArrowRight.onclick = createNavArrowClickHandler(this, -200);
-        this.rightbox.appendChild(navArrowRight);
-        
-        // align or something
-        this.nav.style.left = "0px";
-        this.nav.style.position = "absolute";
-    } else {
-        this.nav.style.position = "initial";
-    }
-    var navbar = document.createElement("div");
-    navbar.className = "navbar";
-    navbar.appendChild(this.nav);
-    this.window.appendChild(navbar);
-    
-    var createNavArrowClickHandler = function(ctx, idx){
-        return function(){ ctx.advance(idx); };
-    };
-    var numImages = 0;
-    this.navNodes = [];
-    for( var ix in image_paths ){
-        var imgSlideimg = document.createElement("img");
-        imgSlideimg.src = image_paths[ix];
-        var imgSlideEl;
-        if( options.linkingImages ){ 
-          imgSlideEl = document.createElement("a");
-          imgSlideEl.href = gallery_paths[ix];
-        } else{
-          imgSlideEl = document.createElement("span");    
-        }
-        imgSlideEl.className = "slide";
-        imgSlideEl.appendChild(imgSlideimg);
-        this.images.appendChild(imgSlideEl);
-        
-        ix = parseInt(ix); // not sure wtf is going on, but getting a non-number number in chrome
-        var navNode = document.createElement("span");
-        if( options.thumbnails ){
-            navNode.className = "navThumb";
-            navNode.innerHTML = "<img src='"+image_paths[ix]+"'/>";
-        } else {
-            navNode.className = "navNode";
-            navNode.innerHTML = "&#9679;";
-        }
-        navNode.onclick = createNavArrowClickHandler( this, ix );
-        navNode.style.opacity = (ix===0 ? "1" : "0.4");
-        this.nav.appendChild(navNode);
-        this.navNodes.push(navNode);
- 
-        if( ix < image_paths.length-1 ){
-            var ditch = document.createElement("span");
-            ditch.className = "navDitch";
-            this.nav.appendChild(ditch);
-        }
-      
-        numImages++;
-    }
-  
-  
+/***/ "./src/App.jsx":
+/*!*********************!*\
+  !*** ./src/App.jsx ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-    this.images.style.minWidth = 800*numImages+"px";
-    this.images.style.left = "0px";
-    this.window.appendChild(this.images);
-  
-    if( this.leftbox ){ 
-      this.unit.appendChild(this.leftbox);
-    }
-    this.unit.appendChild(this.window);
-    if( this.rightbox ){ 
-      this.unit.appendChild(this.rightbox);
-    }
-  
-    container.appendChild(this.unit);
-    
-    this.currentSlide = 0;
-    this.currentNav = 0;
-    this.totalSlides = numImages;
-    this.autoplay = options.autoplay;
-    this.thumbnails = options.thumbnails;
-    this.resumeAutoplay();
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact-router */ \"./node_modules/preact-router/dist/preact-router.mjs\");\n/* harmony import */ var _components_StuckLeft__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/StuckLeft */ \"./src/components/StuckLeft.jsx\");\n/* harmony import */ var _pages_About__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/About */ \"./src/pages/About.jsx\");\n/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Home */ \"./src/pages/Home.jsx\");\n/* harmony import */ var _pages_Contact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Contact */ \"./src/pages/Contact.jsx\");\n/* harmony import */ var _pages_Gallery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Gallery */ \"./src/pages/Gallery.jsx\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\n\n\n\n\n\nconst App = () => {\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(\"div\", {\n    children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_StuckLeft__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {}), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(\"div\", {\n      class: \"content\",\n      children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(preact_router__WEBPACK_IMPORTED_MODULE_0__.Router, {\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Home__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n          path: \"/\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_About__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n          path: \"/about\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Contact__WEBPACK_IMPORTED_MODULE_4__[\"default\"], {\n          path: \"/contact\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Gallery__WEBPACK_IMPORTED_MODULE_5__[\"default\"], {\n          path: \"/gallery/:galleryId\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Home__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n          default: true\n        })]\n      })\n    })]\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n//# sourceURL=webpack://karenport/./src/App.jsx?");
 
-Reel.prototype.defaultOptions = { autoplay: 0, thumbnails: true, arrows: true };
+/***/ }),
 
-Reel.prototype.thumbnailWidth = 40;
-Reel.prototype.ditchWidth = 14;
+/***/ "./src/components/CarouselGallery.jsx":
+/*!********************************************!*\
+  !*** ./src/components/CarouselGallery.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact-router */ \"./node_modules/preact-router/dist/preact-router.mjs\");\n/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/hooks */ \"./node_modules/preact/hooks/dist/hooks.module.js\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\n\nconst SLIDE_WIDTH = 800;\nconst CarouselGallery = _ref => {\n  let {\n    images,\n    withThumbs\n  } = _ref;\n  const [slide, setSlide] = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState)(0);\n  const crement = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useCallback)(idxCrement => {\n    const newIdx = slide + idxCrement;\n    if (newIdx >= images.length) {\n      setSlide(0);\n    } else if (newIdx < 0) {\n      setSlide(images.length - 1);\n    } else {\n      setSlide(newIdx);\n    }\n  }, [slide, images]);\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n    id: \"gallery_container\",\n    children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n      id: \"unit\",\n      children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n        className: \"arrowbox left\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"photoArrow left\",\n          onClick: () => crement(-1)\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"navArrow left\",\n          children: \"\\u25C0\"\n        })]\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n        className: \"window\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"navbar\",\n          children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n            className: \"nav\",\n            children: images.map((image, ix) => {\n              if (withThumbs) {\n                return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n                  className: `navThumb ${ix === slide ? \"active\" : \"\"}`,\n                  onClick: () => {\n                    setSlide(ix);\n                  },\n                  children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"img\", {\n                    src: image.url\n                  })\n                });\n              } else {\n                return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n                  className: `navNode ${ix === slide ? \"active\" : \"\"}`,\n                  onClick: () => {\n                    setSlide(ix);\n                  },\n                  children: \"\\u25CF\"\n                });\n              }\n            })\n          })\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"images\",\n          style: {\n            left: -slide * SLIDE_WIDTH\n          },\n          children: images.map(image => {\n            const tags = image.contentfulMetadata?.tags;\n            if (!tags || tags.length === 0) {\n              return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"span\", {\n                className: \"slide\",\n                children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"img\", {\n                  src: image.url\n                })\n              });\n            } else {\n              return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(preact_router__WEBPACK_IMPORTED_MODULE_0__.Link, {\n                href: `/portfolio/${tags[0].id}`,\n                className: \"slide\",\n                children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"img\", {\n                  src: image.url\n                })\n              });\n            }\n          })\n        })]\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n        className: \"arrowbox right\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"photoArrow right\",\n          onClick: () => crement(1)\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          className: \"navArrow right\",\n          children: \"\\u25B6\"\n        })]\n      })]\n    })\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CarouselGallery);\n\n//# sourceURL=webpack://karenport/./src/components/CarouselGallery.jsx?");
 
-Reel.prototype.forward = function(){
-    var nextSlide = this.currentSlide+1;
-    if( nextSlide < this.totalSlides ){
-        this.advance(nextSlide);
-    } else {
-        this.advance(0);
-    }
-};
+/***/ }),
 
-Reel.prototype.backward = function(){
-    var previousSlide = this.currentSlide-1;
-    if( previousSlide < 0 ){
-        this.advance(this.totalSlides-1);
-    } else {
-        this.advance(previousSlide);
-    }
-};
+/***/ "./src/components/ListGallery.jsx":
+/*!****************************************!*\
+  !*** ./src/components/ListGallery.jsx ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-Reel.prototype.advance = function(slide){
-    console.log(slide);
-    this.navNodes[this.currentSlide].style.opacity = 0.5;
-    this.navNodes[slide].style.opacity = 1;
-    
-    var nodeOffset = slide*(this.thumbnailWidth+this.ditchWidth) + parseInt(this.currentNav);
-    if( nodeOffset < 0 || nodeOffset > 700 ){
-        this.slideNav(-(nodeOffset-200));
-    }
-  
-    this.currentSlide = slide;
-    var self = this;
-    window.clearInterval(this.advancementInterval);
-    this.advancementInterval = window.setInterval( function(){ self.advanceFrame(); }, 7);
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact-router */ \"./node_modules/preact-router/dist/preact-router.mjs\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\nconst ListGallery = _ref => {\n  let {\n    imageSet\n  } = _ref;\n  const images = imageSet.imagesCollection.items;\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(\"div\", {\n    id: \"scrollist\",\n    children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"h1\", {\n      children: imageSet.name\n    }), images.map(image => (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n      className: \"scrollistItem\",\n      children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(preact_router__WEBPACK_IMPORTED_MODULE_0__.Link, {\n        href: image.description,\n        target: \"_blank\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"span\", {\n          className: \"scrollistImage\",\n          children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"img\", {\n            src: image.url\n          })\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"span\", {\n          className: \"scrollistDescription\",\n          children: image.title\n        })]\n      })\n    }))]\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListGallery);\n\n//# sourceURL=webpack://karenport/./src/components/ListGallery.jsx?");
 
+/***/ }),
 
-Reel.prototype.incrementChunk = 30;
+/***/ "./src/components/PortfolioMenu.jsx":
+/*!******************************************!*\
+  !*** ./src/components/PortfolioMenu.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-Reel.prototype.advanceFrame = function(){
-    var imagesTarget = -this.currentSlide*800;
-    var imagesCurrent = parseInt(this.images.style.left);
-    var imagesSignedDifference = imagesTarget - imagesCurrent;
-    var imagesDifference = Math.abs(imagesSignedDifference);
-    
-    var incrementer = this.incrementChunk*(imagesDifference/800) + 5;
-    if( incrementer > imagesDifference ){
-        this.images.style.left = imagesTarget + "px";
-        window.clearInterval( this.advancementInterval );
-        this.resumeAutoplay();
-    } else if( imagesSignedDifference > 0 ){
-        this.images.style.left = imagesCurrent + incrementer + "px";
-    } else {
-        this.images.style.left = imagesCurrent - incrementer + "px";
-    }
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\n/* harmony import */ var preact_router_match__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact-router/match */ \"./node_modules/preact-router/match/index.mjs\");\n/* harmony import */ var _useContentful__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../useContentful */ \"./src/useContentful.js\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\n\nconst query = `\n{\n  imageSetCollection {\n    items {\n      name\n      contentfulMetadata{\n        tags{\n          id\n        }\n      }\n    }\n  }\n}\n`;\nconst PortfolioItem = _ref => {\n  let {\n    imageSet\n  } = _ref;\n  const tags = imageSet.contentfulMetadata.tags;\n  if (tags.length === 0) {\n    return null;\n  }\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(\"div\", {\n    class: \"gallery\",\n    children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(preact_router_match__WEBPACK_IMPORTED_MODULE_1__.Link, {\n      href: `/gallery/${tags[0].id}`,\n      activeClassName: \"active\",\n      children: imageSet.name\n    })\n  });\n};\nconst PortfolioMenu = () => {\n  const [isLoading, response, errors] = (0,_useContentful__WEBPACK_IMPORTED_MODULE_2__.useContentful)(query);\n  if (isLoading) {\n    return null;\n  }\n  if (errors) {\n    console.error(errors);\n    return null;\n  }\n  const imageSetItems = response.imageSetCollection.items.filter(item => item.label !== \"home\");\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment, {\n    children: imageSetItems.map(item => (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PortfolioItem, {\n      imageSet: item\n    }))\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PortfolioMenu);\n\n//# sourceURL=webpack://karenport/./src/components/PortfolioMenu.jsx?");
 
+/***/ }),
 
-Reel.prototype.slideNav = function(amt){
-    this.currentNav = this.currentNav + amt;
-    window.clearInterval(this.navInterval);
-    var self = this;
-    this.navInterval = window.setInterval( function(){ self.slideNavFrame(); }, 7);
-};
+/***/ "./src/components/StuckLeft.jsx":
+/*!**************************************!*\
+  !*** ./src/components/StuckLeft.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-Reel.prototype.slideNavFrame = function(){
-    var slideCurrent = parseInt(this.nav.style.left);
-    var slideSignedDifference = this.currentNav - slideCurrent;
-    var slideDifference = Math.abs(slideSignedDifference);
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact_router_match__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact-router/match */ \"./node_modules/preact-router/match/index.mjs\");\n/* harmony import */ var _PortfolioMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PortfolioMenu */ \"./src/components/PortfolioMenu.jsx\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\n\nconst StuckLeft = () => {\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n    class: \"stuckleft\",\n    children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n      id: \"logo\",\n      children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(preact_router_match__WEBPACK_IMPORTED_MODULE_0__.Link, {\n        href: \"/\",\n        children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"img\", {\n          src: \"/assets/canvas-deep.png\"\n        })\n      })\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n      id: \"menu\",\n      children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n        id: \"home_item\",\n        class: \"menuItem\",\n        children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(preact_router_match__WEBPACK_IMPORTED_MODULE_0__.Link, {\n          href: \"/\",\n          activeClassName: \"active\",\n          children: \"Home\"\n        })\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n        id: \"portflio_item\",\n        class: \"menuItem\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"a\", {\n          children: \"Portfolio\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n          id: \"portfolio\",\n          children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_PortfolioMenu__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {})\n        })]\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n        id: \"about_item\",\n        class: \"menuItem\",\n        children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(preact_router_match__WEBPACK_IMPORTED_MODULE_0__.Link, {\n          href: \"/about\",\n          activeClassName: \"active\",\n          children: \"About Me\"\n        })\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(\"div\", {\n        id: \"contact_item\",\n        class: \"menuItem\",\n        children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(preact_router_match__WEBPACK_IMPORTED_MODULE_0__.Link, {\n          href: \"/contact\",\n          activeClassName: \"active\",\n          children: \"Contact\"\n        })\n      })]\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(\"div\", {\n      id: \"copyrights\",\n      class: \"\",\n      children: [\"\\xA9 \", new Date().getFullYear(), \" Karen Gioia Photography\"]\n    })]\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StuckLeft);\n\n//# sourceURL=webpack://karenport/./src/components/StuckLeft.jsx?");
 
-    if( slideCurrent < -this.maxNav ){
-        this.nav.style.left = -this.maxNav+"px";
-        this.currentNav = -this.maxNav;
-        window.clearInterval( this.navInterval );
-    } else if( slideCurrent > 0 ){
-        this.nav.style.left = "0px";
-        this.currentNav = 0;
-        window.clearInterval( this.navInterval );
-    } else {
-        var incrementer = 0;
-        incrementer = this.incrementChunk*(slideDifference/200) + 5;
-        if( incrementer > slideDifference ){
-            this.nav.style.left = this.currentNav + "px";
-            window.clearInterval( this.navInterval );
-        } else if( slideSignedDifference > 0 ){
-            this.nav.style.left = slideCurrent + incrementer + "px";
-        } else {
-            this.nav.style.left = slideCurrent - incrementer + "px";
-        }
-    }
-};
+/***/ }),
 
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App */ \"./src/App.jsx\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\nconst root = document.getElementById(\"root\");\n(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)((0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_App__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {}), root);\n\n//# sourceURL=webpack://karenport/./src/index.js?");
 
-Reel.prototype.resumeAutoplay = function(){
-    if( this.autoplay > 0 ){
-        var self = this;
-        this.advancementInterval = setInterval( function(){ self.forward(); }, this.autoplay );
-    }
-};
+/***/ }),
 
+/***/ "./src/pages/About.jsx":
+/*!*****************************!*\
+  !*** ./src/pages/About.jsx ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\nconst About = () => {\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(\"div\", {\n    id: \"about\",\n    children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"h1\", {\n      children: \"About Me\"\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(\"div\", {\n      class: \"about_flex\",\n      children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"div\", {\n        class: \"about_image\",\n        children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"img\", {\n          src: \"/assets/mephoto300.jpg\"\n        })\n      }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(\"div\", {\n        class: \"about_text\",\n        children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: \"I graduated from Columbia College Chicago in May 2012 with a BFA in photography and a minor in web development. Before moving to Chicago, I spent three years at Case Western Reserve University and had majored in Computational Biology with a minor in photography.\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: \"I have very diverse interests, but my main interests are in action sports photography and photojournalism.\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: \"I also photograph real estate for local realtors' online listings.\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: \"I attended the 2012 Sports Shooter Academy IX Workshop and the 2017 NPPA Multimedia Immersion Workshop.\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: \"I was born in Buffalo, NY and grew up in the western New York area near Niagara Falls. I moved to Cleveland, OH in 2006 and lived there for three years while I attended Case Western Reserve University. I moved to Chicago, IL in 2009 to pursue my degree in photography and lived in the city for five years. In 2014, I returned to western New York to continue to grow my photography business.\"\n        }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"br\", {}), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"p\", {\n          children: (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(\"a\", {\n            href: \"assets/resume.pdf\",\n            children: \"-- My Resume --\"\n          })\n        })]\n      })]\n    })]\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (About);\n\n//# sourceURL=webpack://karenport/./src/pages/About.jsx?");
 
+/***/ }),
 
+/***/ "./src/pages/Contact.jsx":
+/*!*******************************!*\
+  !*** ./src/pages/Contact.jsx ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\nconst Contact = () => {\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment, {\n    children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"h1\", {\n      children: \"Contact\"\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(\"p\", {\n      children: [(0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"br\", {}), \"Tonawanda, NY 14150\"]\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(\"p\", {\n      children: [\"Home: (716) 834-4438\", (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"br\", {}), \"Cell: (716) 435-4664\"]\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"p\", {\n      children: \"Email: karen@karengioia.com\"\n    }), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"br\", {}), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"br\", {}), (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"p\", {\n      style: \"font-size: 0.9rem;\",\n      children: \"All images are the property of Karen Gioia and protected under US and International copyright laws. Copying, duplicating, saving as a digital file, printing, publishing in form of media including web, manipulating, transmitting or reproducing without the prior written permission of Karen Gioia is strictly forbidden and would constitute a breach of copyright.\"\n    })]\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Contact);\n\n//# sourceURL=webpack://karenport/./src/pages/Contact.jsx?");
 
+/***/ }),
 
+/***/ "./src/pages/Gallery.jsx":
+/*!*******************************!*\
+  !*** ./src/pages/Gallery.jsx ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _useContentful__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../useContentful */ \"./src/useContentful.js\");\n/* harmony import */ var _components_CarouselGallery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/CarouselGallery */ \"./src/components/CarouselGallery.jsx\");\n/* harmony import */ var _components_ListGallery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/ListGallery */ \"./src/components/ListGallery.jsx\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\n\nconst HOME_ENTRY_ID = \"51z9h0rSyYmliq9YpY01nF\";\nconst getQuery = imageSetTag => {\n  return `\n  {\n    imageSetCollection(where: {\n      contentfulMetadata: {\n        tags: {\n          id_contains_all: [\"${imageSetTag}\"]\n        }\n      }\n    }) {\n      items {\n        name\n        isList\n        imagesCollection {\n          items{\n            url\n            title\n            description\n          }\n        }\n      }\n    }\n  }`;\n};\nconst Gallery = _ref => {\n  let {\n    galleryId\n  } = _ref;\n  const [isLoading, response, errors] = (0,_useContentful__WEBPACK_IMPORTED_MODULE_0__.useContentful)(getQuery(galleryId));\n  if (isLoading) {\n    return null;\n  }\n  if (errors) {\n    console.error(errors);\n    return null;\n  }\n  const items = response.imageSetCollection.items;\n  if (items.length === 0) {\n    return null;\n  }\n  const imageSet = items[0];\n  if (imageSet.isList) {\n    return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_ListGallery__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n      imageSet: imageSet\n    });\n  } else {\n    const images = imageSet.imagesCollection.items;\n    return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_CarouselGallery__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      images: images,\n      withThumbs: true\n    });\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Gallery);\n\n//# sourceURL=webpack://karenport/./src/pages/Gallery.jsx?");
 
+/***/ }),
 
+/***/ "./src/pages/Home.jsx":
+/*!****************************!*\
+  !*** ./src/pages/Home.jsx ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-function domLoaded(callback) {
-    /* Internet Explorer */
-    /*@cc_on
-    @if (@_win32 || @_win64)
-        document.write('<script id="ieScriptLoad" defer src="//:"><\/script>');
-        document.getElementById('ieScriptLoad').onreadystatechange = function() {
-            if (this.readyState == 'complete') {
-                callback();
-            }
-        };
-    @end @*/
-    /* Mozilla, Chrome, Opera */
-    if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', callback, false);
-    }
-    /* Safari, iCab, Konqueror */
-    if (/KHTML|WebKit|iCab/i.test(navigator.userAgent)) {
-        var DOMLoadTimer = setInterval(function () {
-            if (/loaded|complete/i.test(document.readyState)) {
-                callback();
-                clearInterval(DOMLoadTimer);
-            }
-        }, 10);
-    }
-    /* Other web browsers */
-    window.onload = callback;
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _useContentful__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../useContentful */ \"./src/useContentful.js\");\n/* harmony import */ var _components_CarouselGallery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/CarouselGallery */ \"./src/components/CarouselGallery.jsx\");\n/* harmony import */ var preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/jsx-runtime */ \"./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js\");\n\n\n\nconst HOME_ENTRY_ID = \"51z9h0rSyYmliq9YpY01nF\";\nconst query = `\n{\n  imageSet(id:\"${HOME_ENTRY_ID}\") {\n    name\n    imagesCollection {\n      items{\n        url\n        contentfulMetadata{\n          tags{\n            id\n          }\n        }\n      }\n    }\n  }\n}\n`;\nconst Home = () => {\n  const [isLoading, response, errors] = (0,_useContentful__WEBPACK_IMPORTED_MODULE_0__.useContentful)(query);\n  if (isLoading) {\n    return null;\n  }\n  if (errors) {\n    console.error(errors);\n    return null;\n  }\n  const {\n    imagesCollection\n  } = response.imageSet;\n  return (0,preact_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_CarouselGallery__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n    images: imagesCollection.items,\n    withThumbs: true\n  });\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);\n\n//# sourceURL=webpack://karenport/./src/pages/Home.jsx?");
 
-function togglePortfolio(){
-    var portfolio = document.getElementById("portfolio");
-    if( portfolio.className === "" ){
-        portfolio.className = "ninja";
-    } else {
-        portfolio.className = "";
-    }
-}
+/***/ }),
+
+/***/ "./src/useContentful.js":
+/*!******************************!*\
+  !*** ./src/useContentful.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"useContentful\": () => (/* binding */ useContentful)\n/* harmony export */ });\n/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact/hooks */ \"./node_modules/preact/hooks/dist/hooks.module.js\");\n\nconst CONTENTFUL_SPACE_ID = \"wae9rq1y8oon\";\nconst CONTENTFUL_PUBLISHED_TOKEN = \"BU0EAgTuPkKWRJFN3gjkonCTayEZW1V4J6_GEcsUpoE\";\nconst CONTENTFUL_PREVIEW_TOKEN = \"piG1q7uCmQEVGxCif32IHSwIPnrxE7LUazkE1-Kcx7c\";\nconst useContentful = query => {\n  const [isLoading, setIsLoading] = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useState)(true);\n  const [response, setResponse] = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useState)(null);\n  const [errors, setErrors] = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useState)(null);\n  (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    setIsLoading(true);\n    window.fetch(`https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}/`, {\n      method: \"POST\",\n      headers: {\n        \"Content-Type\": \"application/json\",\n        // Authenticate the request\n        Authorization: `Bearer ${CONTENTFUL_PUBLISHED_TOKEN}`\n      },\n      // send the GraphQL query\n      body: JSON.stringify({\n        query\n      })\n    }).then(resp => resp.json()).then(_ref => {\n      let {\n        data,\n        errors\n      } = _ref;\n      setIsLoading(false);\n      if (errors) {\n        setErrors(errors);\n      } else {\n        // rerender the entire component with new data\n        setResponse(data);\n      }\n    }).catch(err => {\n      setIsLoading(false);\n      if (err) {\n        setErrors(err);\n      } else {\n        setErrors(new Error(\"Error occured while fetching content\"));\n      }\n    });\n  }, [query]);\n  return [isLoading, response, errors];\n};\n\n//# sourceURL=webpack://karenport/./src/useContentful.js?");
+
+/***/ }),
+
+/***/ "./node_modules/preact/dist/preact.module.js":
+/*!***************************************************!*\
+  !*** ./node_modules/preact/dist/preact.module.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Component\": () => (/* binding */ k),\n/* harmony export */   \"Fragment\": () => (/* binding */ _),\n/* harmony export */   \"cloneElement\": () => (/* binding */ E),\n/* harmony export */   \"createContext\": () => (/* binding */ F),\n/* harmony export */   \"createElement\": () => (/* binding */ y),\n/* harmony export */   \"createRef\": () => (/* binding */ d),\n/* harmony export */   \"h\": () => (/* binding */ y),\n/* harmony export */   \"hydrate\": () => (/* binding */ D),\n/* harmony export */   \"isValidElement\": () => (/* binding */ i),\n/* harmony export */   \"options\": () => (/* binding */ l),\n/* harmony export */   \"render\": () => (/* binding */ B),\n/* harmony export */   \"toChildArray\": () => (/* binding */ P)\n/* harmony export */ });\nvar n,l,u,i,t,r,o,f,e,c={},s=[],a=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h(n,l){for(var u in l)n[u]=l[u];return n}function v(n){var l=n.parentNode;l&&l.removeChild(n)}function y(l,u,i){var t,r,o,f={};for(o in u)\"key\"==o?t=u[o]:\"ref\"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),\"function\"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p(l,f,t,r,null)}function p(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u:o};return null==o&&null!=l.vnode&&l.vnode(f),f}function d(){return{current:null}}function _(n){return n.children}function k(n,l){this.props=n,this.context=l}function b(n,l){if(null==l)return n.__?b(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return\"function\"==typeof n.type?b(n):null}function g(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return g(n)}}function m(n){(!n.__d&&(n.__d=!0)&&t.push(n)&&!w.__r++||r!==l.debounceRendering)&&((r=l.debounceRendering)||o)(w)}function w(){var n,l,u,i,r,o,e,c;for(t.sort(f);n=t.shift();)n.__d&&(l=t.length,i=void 0,r=void 0,e=(o=(u=n).__v).__e,(c=u.__P)&&(i=[],(r=h({},o)).__v=o.__v+1,L(c,o,r,u.__n,void 0!==c.ownerSVGElement,null!=o.__h?[e]:null,i,null==e?b(o):e,o.__h),M(i,o),o.__e!=e&&g(o)),t.length>l&&t.sort(f));w.__r=0}function x(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,g,m,w=i&&i.__k||s,x=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||\"boolean\"==typeof d||\"function\"==typeof d?null:\"string\"==typeof d||\"number\"==typeof d||\"bigint\"==typeof d?p(null,d,null,null,d):Array.isArray(d)?p(_,{children:d},null,null,null):d.__b>0?p(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=w[h])||y&&d.key==y.key&&d.type===y.type)w[h]=void 0;else for(v=0;v<x;v++){if((y=w[v])&&d.key==y.key&&d.type===y.type){w[v]=void 0;break}y=null}L(n,d,y=y||c,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(m||(m=[]),y.ref&&m.push(y.ref,null,d),m.push(v,d.__c||k,d)),null!=k?(null==g&&(g=k),\"function\"==typeof d.type&&d.__k===y.__k?d.__d=e=A(d,e,n):e=C(n,d,y,w,k,e),\"function\"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=b(y))}for(u.__e=g,h=x;h--;)null!=w[h]&&(\"function\"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=$(i).nextSibling),S(w[h],w[h]));if(m)for(h=0;h<m.length;h++)O(m[h],m[++h],m[++h])}function A(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l=\"function\"==typeof i.type?A(i,l,u):C(u,i,i,t,i.__e,l));return l}function P(n,l){return l=l||[],null==n||\"boolean\"==typeof n||(Array.isArray(n)?n.some(function(n){P(n,l)}):l.push(n)),l}function C(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else{for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r}return void 0!==o?o:t.nextSibling}function $(n){var l,u,i;if(null==n.type||\"string\"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=$(u)))return i;return null}function H(n,l,u,i,t){var r;for(r in u)\"children\"===r||\"key\"===r||r in l||T(n,r,null,u[r],i);for(r in l)t&&\"function\"!=typeof l[r]||\"children\"===r||\"key\"===r||\"value\"===r||\"checked\"===r||u[r]===l[r]||T(n,r,l[r],u[r],i)}function I(n,l,u){\"-\"===l[0]?n.setProperty(l,null==u?\"\":u):n[l]=null==u?\"\":\"number\"!=typeof u||a.test(l)?u:u+\"px\"}function T(n,l,u,i,t){var r;n:if(\"style\"===l)if(\"string\"==typeof u)n.style.cssText=u;else{if(\"string\"==typeof i&&(n.style.cssText=i=\"\"),i)for(l in i)u&&l in u||I(n.style,l,\"\");if(u)for(l in u)i&&u[l]===i[l]||I(n.style,l,u[l])}else if(\"o\"===l[0]&&\"n\"===l[1])r=l!==(l=l.replace(/Capture$/,\"\")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?z:j,r):n.removeEventListener(l,r?z:j,r);else if(\"dangerouslySetInnerHTML\"!==l){if(t)l=l.replace(/xlink(H|:h)/,\"h\").replace(/sName$/,\"s\");else if(\"width\"!==l&&\"height\"!==l&&\"href\"!==l&&\"list\"!==l&&\"form\"!==l&&\"tabIndex\"!==l&&\"download\"!==l&&l in n)try{n[l]=null==u?\"\":u;break n}catch(n){}\"function\"==typeof u||(null==u||!1===u&&\"-\"!==l[4]?n.removeAttribute(l):n.setAttribute(l,u))}}function j(n){return this.l[n.type+!1](l.event?l.event(n):n)}function z(n){return this.l[n.type+!0](l.event?l.event(n):n)}function L(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,b,g,m,w,A,P,C,$,H,I=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l.__b)&&s(u);try{n:if(\"function\"==typeof I){if(g=u.props,m=(s=I.contextType)&&t[s.__c],w=s?m?m.props.value:s.__:t,i.__c?b=(a=u.__c=i.__c).__=a.__E:(\"prototype\"in I&&I.prototype.render?u.__c=a=new I(g,w):(u.__c=a=new k(g,w),a.constructor=I,a.render=q),m&&m.sub(a),a.props=g,a.state||(a.state={}),a.context=w,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=I.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h({},a.__s)),h(a.__s,I.getDerivedStateFromProps(g,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==I.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else{if(null==I.getDerivedStateFromProps&&g!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(g,w),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(g,a.__s,w)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=g,a.state=a.__s,a.__d=!1),a.__e=!1,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),A=0;A<a._sb.length;A++)a.__h.push(a._sb[A]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(g,a.__s,w),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d)})}if(a.context=w,a.props=g,a.__P=n,P=l.__r,C=0,\"prototype\"in I&&I.prototype.render){for(a.state=a.__s,a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),$=0;$<a._sb.length;$++)a.__h.push(a._sb[$]);a._sb=[]}else do{a.__d=!1,P&&P(u),s=a.render(a.props,a.state,a.context),a.state=a.__s}while(a.__d&&++C<25);a.state=a.__s,null!=a.getChildContext&&(t=h(h({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),H=null!=s&&s.type===_&&null==s.key?s.props.children:s,x(n,Array.isArray(H)?H:[H],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),b&&(a.__E=a.__=null),a.__e=!1}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=N(i.__e,u,i,t,r,o,f,c);(s=l.diffed)&&s(u)}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l.__e(n,u,i)}}function M(n,u){l.__c&&l.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u)})}catch(n){l.__e(n,u.__v)}})}function N(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if(\"svg\"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&\"setAttribute\"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS(\"http://www.w3.org/2000/svg\",d):document.createElement(d,p.is&&p),o=null,e=!1}if(null===d)y===p||e&&l.data===p||(l.data=p);else{if(o=o&&n.call(l.childNodes),a=(y=i.props||c).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||\"\"))}if(H(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,x(l,Array.isArray(_)?_:[_],u,i,t,r&&\"foreignObject\"!==d,o,f,o?o[0]:i.__k&&b(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v(o[_]);e||(\"value\"in p&&void 0!==(_=p.value)&&(_!==l.value||\"progress\"===d&&!_||\"option\"===d&&_!==y.value)&&T(l,\"value\",_,y.value,!1),\"checked\"in p&&void 0!==(_=p.checked)&&_!==l.checked&&T(l,\"checked\",_,y.checked,!1))}return l}function O(n,u,i){try{\"function\"==typeof n?n(u):n.current=u}catch(n){l.__e(n,i)}}function S(n,u,i){var t,r;if(l.unmount&&l.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||O(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(n){l.__e(n,u)}t.base=t.__P=null,n.__c=void 0}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&S(t[r],u,i||\"function\"!=typeof n.type);i||null==n.__e||v(n.__e),n.__=n.__e=n.__d=void 0}function q(n,l,u){return this.constructor(n,u)}function B(u,i,t){var r,o,f;l.__&&l.__(u,i),o=(r=\"function\"==typeof t)?null:t&&t.__k||i.__k,f=[],L(i,u=(!r&&t||i).__k=y(_,null,[u]),o||c,c,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),M(f,u)}function D(n,l){B(n,l,D)}function E(l,u,i){var t,r,o,f=h({},l.props);for(o in u)\"key\"==o?t=u[o]:\"ref\"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),p(l.type,f,t||l.key,r||l.ref,null)}function F(n,l){var u={__c:l=\"__cC\"+e++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,m(n)})},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n=s.slice,l={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l}throw n}},u=0,i=function(n){return null!=n&&void 0===n.constructor},k.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h({},this.state),\"function\"==typeof n&&(n=n(h({},u),this.props)),n&&h(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),m(this))},k.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m(this))},k.prototype.render=_,t=[],o=\"function\"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,f=function(n,l){return n.__v.__b-l.__v.__b},w.__r=0,e=0;\n//# sourceMappingURL=preact.module.js.map\n\n\n//# sourceURL=webpack://karenport/./node_modules/preact/dist/preact.module.js?");
+
+/***/ }),
+
+/***/ "./node_modules/preact/hooks/dist/hooks.module.js":
+/*!********************************************************!*\
+  !*** ./node_modules/preact/hooks/dist/hooks.module.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"useCallback\": () => (/* binding */ T),\n/* harmony export */   \"useContext\": () => (/* binding */ q),\n/* harmony export */   \"useDebugValue\": () => (/* binding */ x),\n/* harmony export */   \"useEffect\": () => (/* binding */ p),\n/* harmony export */   \"useErrorBoundary\": () => (/* binding */ P),\n/* harmony export */   \"useId\": () => (/* binding */ V),\n/* harmony export */   \"useImperativeHandle\": () => (/* binding */ A),\n/* harmony export */   \"useLayoutEffect\": () => (/* binding */ y),\n/* harmony export */   \"useMemo\": () => (/* binding */ F),\n/* harmony export */   \"useReducer\": () => (/* binding */ s),\n/* harmony export */   \"useRef\": () => (/* binding */ _),\n/* harmony export */   \"useState\": () => (/* binding */ h)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\nvar t,r,u,i,o=0,f=[],c=[],e=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b,a=preact__WEBPACK_IMPORTED_MODULE_0__.options.__r,v=preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed,l=preact__WEBPACK_IMPORTED_MODULE_0__.options.__c,m=preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount;function d(t,u){preact__WEBPACK_IMPORTED_MODULE_0__.options.__h&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__h(r,t,o||u),o=0;var i=r.__H||(r.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c}),i.__[t]}function h(n){return o=1,s(B,n)}function s(n,u,i){var o=d(t++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}))}],o.__c=r,!r.u)){var f=function(n,t,r){if(!o.__c.__H)return!0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return!n.__N}))return!c||c.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0)}}),!(!i&&o.__c.props===n)&&(!c||c.call(this,n,t,r))};r.u=!0;var c=r.shouldComponentUpdate,e=r.componentWillUpdate;r.componentWillUpdate=function(n,t,r){if(this.__e){var u=c;c=void 0,f(n,t,r),c=u}e&&e.call(this,n,t,r)},r.shouldComponentUpdate=f}return o.__N||o.__}function p(u,i){var o=d(t++,3);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__H.__h.push(o))}function y(u,i){var o=d(t++,4);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__h.push(o))}function _(n){return o=5,F(function(){return{current:n}},[])}function A(n,t,r){o=6,y(function(){return\"function\"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n))}function F(n,r){var u=d(t++,7);return z(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T(n,t){return o=8,F(function(){return n},t)}function q(n){var u=r.context[n.__c],i=d(t++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r)),u.props.value):n.__}function x(t,r){preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue&&preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue(r?r(t):t)}function P(n){var u=d(t++,10),i=h();return u.__=n,r.componentDidCatch||(r.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n)}),[i[0],function(){i[1](void 0)}]}function V(){var n=d(t++,11);if(!n.__){for(var u=r.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__=\"P\"+i[0]+\"-\"+i[1]++}return n.__}function b(){for(var t;t=f.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k),t.__H.__h.forEach(w),t.__H.__h=[]}catch(r){t.__H.__h=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,t.__v)}}preact__WEBPACK_IMPORTED_MODULE_0__.options.__b=function(n){r=null,e&&e(n)},preact__WEBPACK_IMPORTED_MODULE_0__.options.__r=function(n){a&&a(n),t=0;var i=(r=n.__c).__H;i&&(u===r?(i.__h=[],r.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c,n.__N=n.i=void 0})):(i.__h.forEach(k),i.__h.forEach(w),i.__h=[])),u=r},preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed=function(t){v&&v(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f.push(o)&&i===preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame||((i=preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame)||j)(b)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c&&(n.__=n.__V),n.i=void 0,n.__V=c})),u=r=null},preact__WEBPACK_IMPORTED_MODULE_0__.options.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k),t.__h=t.__h.filter(function(n){return!n.__||w(n)})}catch(u){r.some(function(n){n.__h&&(n.__h=[])}),r=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(u,t.__v)}}),l&&l(t,r)},preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount=function(t){m&&m(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k(n)}catch(n){r=n}}),u.__H=void 0,r&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,u.__v))};var g=\"function\"==typeof requestAnimationFrame;function j(n){var t,r=function(){clearTimeout(u),g&&cancelAnimationFrame(t),setTimeout(n)},u=setTimeout(r,100);g&&(t=requestAnimationFrame(r))}function k(n){var t=r,u=n.__c;\"function\"==typeof u&&(n.__c=void 0,u()),r=t}function w(n){var t=r;n.__c=n.__(),r=t}function z(n,t){return!n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B(n,t){return\"function\"==typeof t?t(n):t}\n//# sourceMappingURL=hooks.module.js.map\n\n\n//# sourceURL=webpack://karenport/./node_modules/preact/hooks/dist/hooks.module.js?");
+
+/***/ }),
+
+/***/ "./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Fragment\": () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.Fragment),\n/* harmony export */   \"jsx\": () => (/* binding */ o),\n/* harmony export */   \"jsxDEV\": () => (/* binding */ o),\n/* harmony export */   \"jsxs\": () => (/* binding */ o)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\nvar _=0;function o(o,e,n,t,f,l){var s,u,a={};for(u in e)\"ref\"==u?s=e[u]:a[u]=e[u];var i={type:o,props:a,key:n,ref:s,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:--_,__source:f,__self:l};if(\"function\"==typeof o&&(s=o.defaultProps))for(u in s)void 0===a[u]&&(a[u]=s[u]);return preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode&&preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode(i),i}\n//# sourceMappingURL=jsxRuntime.module.js.map\n\n\n//# sourceURL=webpack://karenport/./node_modules/preact/jsx-runtime/dist/jsxRuntime.module.js?");
+
+/***/ }),
+
+/***/ "./node_modules/preact-router/dist/preact-router.mjs":
+/*!***********************************************************!*\
+  !*** ./node_modules/preact-router/dist/preact-router.mjs ***!
+  \***********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Link\": () => (/* binding */ E),\n/* harmony export */   \"Route\": () => (/* binding */ L),\n/* harmony export */   \"Router\": () => (/* binding */ D),\n/* harmony export */   \"default\": () => (/* binding */ D),\n/* harmony export */   \"exec\": () => (/* binding */ s),\n/* harmony export */   \"getCurrentUrl\": () => (/* binding */ R),\n/* harmony export */   \"route\": () => (/* binding */ $),\n/* harmony export */   \"useRouter\": () => (/* binding */ C)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\n/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/hooks */ \"./node_modules/preact/hooks/dist/hooks.module.js\");\nvar a={};function c(n,t){for(var r in t)n[r]=t[r];return n}function s(n,t,r){var i,o=/(?:\\?([^#]*))?(#.*)?$/,e=n.match(o),u={};if(e&&e[1])for(var f=e[1].split(\"&\"),c=0;c<f.length;c++){var s=f[c].split(\"=\");u[decodeURIComponent(s[0])]=decodeURIComponent(s.slice(1).join(\"=\"))}n=d(n.replace(o,\"\")),t=d(t||\"\");for(var h=Math.max(n.length,t.length),v=0;v<h;v++)if(t[v]&&\":\"===t[v].charAt(0)){var l=t[v].replace(/(^:|[+*?]+$)/g,\"\"),p=(t[v].match(/[+*?]+$/)||a)[0]||\"\",m=~p.indexOf(\"+\"),y=~p.indexOf(\"*\"),U=n[v]||\"\";if(!U&&!y&&(p.indexOf(\"?\")<0||m)){i=!1;break}if(u[l]=decodeURIComponent(U),m||y){u[l]=n.slice(v).map(decodeURIComponent).join(\"/\");break}}else if(t[v]!==n[v]){i=!1;break}return(!0===r.default||!1!==i)&&u}function h(n,t){return n.rank<t.rank?1:n.rank>t.rank?-1:n.index-t.index}function v(n,t){return n.index=t,n.rank=function(n){return n.props.default?0:d(n.props.path).map(l).join(\"\")}(n),n.props}function d(n){return n.replace(/(^\\/+|\\/+$)/g,\"\").split(\"/\")}function l(n){return\":\"==n.charAt(0)?1+\"*+?\".indexOf(n.charAt(n.length-1))||4:5}var p={},m=[],y=[],U=null,g={url:R()},k=(0,preact__WEBPACK_IMPORTED_MODULE_0__.createContext)(g);function C(){var n=(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useContext)(k);if(n===g){var t=(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState)()[1];(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function(){return y.push(t),function(){return y.splice(y.indexOf(t),1)}},[])}return[n,$]}function R(){var n;return\"\"+((n=U&&U.location?U.location:U&&U.getCurrentLocation?U.getCurrentLocation():\"undefined\"!=typeof location?location:p).pathname||\"\")+(n.search||\"\")}function $(n,t){return void 0===t&&(t=!1),\"string\"!=typeof n&&n.url&&(t=n.replace,n=n.url),function(n){for(var t=m.length;t--;)if(m[t].canRoute(n))return!0;return!1}(n)&&function(n,t){void 0===t&&(t=\"push\"),U&&U[t]?U[t](n):\"undefined\"!=typeof history&&history[t+\"State\"]&&history[t+\"State\"](null,null,n)}(n,t?\"replace\":\"push\"),I(n)}function I(n){for(var t=!1,r=0;r<m.length;r++)m[r].routeTo(n)&&(t=!0);return t}function M(n){if(n&&n.getAttribute){var t=n.getAttribute(\"href\"),r=n.getAttribute(\"target\");if(t&&t.match(/^\\//g)&&(!r||r.match(/^_?self$/i)))return $(t)}}function b(n){return n.stopImmediatePropagation&&n.stopImmediatePropagation(),n.stopPropagation&&n.stopPropagation(),n.preventDefault(),!1}function W(n){if(!(n.ctrlKey||n.metaKey||n.altKey||n.shiftKey||n.button)){var t=n.target;do{if(\"a\"===t.localName&&t.getAttribute(\"href\")){if(t.hasAttribute(\"data-native\")||t.hasAttribute(\"native\"))return;if(M(t))return b(n)}}while(t=t.parentNode)}}var w=!1;function D(n){n.history&&(U=n.history),this.state={url:n.url||R()}}c(D.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component,{shouldComponentUpdate:function(n){return!0!==n.static||n.url!==this.props.url||n.onChange!==this.props.onChange},canRoute:function(n){var t=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(this.props.children);return void 0!==this.g(t,n)},routeTo:function(n){this.setState({url:n});var t=this.canRoute(n);return this.p||this.forceUpdate(),t},componentWillMount:function(){this.p=!0},componentDidMount:function(){var n=this;w||(w=!0,U||addEventListener(\"popstate\",function(){I(R())}),addEventListener(\"click\",W)),m.push(this),U&&(this.u=U.listen(function(t){var r=t.location||t;n.routeTo(\"\"+(r.pathname||\"\")+(r.search||\"\"))})),this.p=!1},componentWillUnmount:function(){\"function\"==typeof this.u&&this.u(),m.splice(m.indexOf(this),1)},componentWillUpdate:function(){this.p=!0},componentDidUpdate:function(){this.p=!1},g:function(n,t){n=n.filter(v).sort(h);for(var r=0;r<n.length;r++){var i=n[r],o=s(t,i.props.path,i.props);if(o)return[i,o]}},render:function(n,t){var e,u,f=n.onChange,a=t.url,s=this.c,h=this.g((0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n.children),a);if(h&&(u=(0,preact__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(h[0],c(c({url:a,matches:e=h[1]},e),{key:void 0,ref:void 0}))),a!==(s&&s.url)){c(g,s=this.c={url:a,previous:s&&s.url,current:u,path:u?u.props.path:null,matches:e}),s.router=this,s.active=u?[u]:[];for(var v=y.length;v--;)y[v]({});\"function\"==typeof f&&f(s)}return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)(k.Provider,{value:s},u)}});var E=function(n){return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)(\"a\",c({onClick:W},n))},L=function(n){return (0,preact__WEBPACK_IMPORTED_MODULE_0__.h)(n.component,n)};\n//# sourceMappingURL=preact-router.module.js.map\n\n\n//# sourceURL=webpack://karenport/./node_modules/preact-router/dist/preact-router.mjs?");
+
+/***/ }),
+
+/***/ "./node_modules/preact-router/match/index.mjs":
+/*!****************************************************!*\
+  !*** ./node_modules/preact-router/match/index.mjs ***!
+  \****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Link\": () => (/* binding */ c),\n/* harmony export */   \"Match\": () => (/* binding */ l),\n/* harmony export */   \"default\": () => (/* binding */ l)\n/* harmony export */ });\n/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ \"./node_modules/preact/dist/preact.module.js\");\n/* harmony import */ var preact_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact-router */ \"./node_modules/preact-router/dist/preact-router.mjs\");\nvar s=[\"className\",\"activeClass\",\"activeClassName\",\"path\"];function l(a){var e=(0,preact_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)()[0];return a.children({url:e.url,path:e.path,matches:!1!==(0,preact_router__WEBPACK_IMPORTED_MODULE_1__.exec)(e.path||e.url,a.path,{})})}function c(l){var c=l.className,n=l.activeClass,u=l.activeClassName,i=l.path,p=function(a,t){if(null==a)return{};var r,e,s={},l=Object.keys(a);for(e=0;e<l.length;e++)t.indexOf(r=l[e])>=0||(s[r]=a[r]);return s}(l,s),h=(0,preact_router__WEBPACK_IMPORTED_MODULE_1__.useRouter)()[0],f=i&&h.path&&(0,preact_router__WEBPACK_IMPORTED_MODULE_1__.exec)(h.path,i,{})||(0,preact_router__WEBPACK_IMPORTED_MODULE_1__.exec)(h.url,p.href,{}),o=p.class||c||\"\",m=f&&(n||u)||\"\";return p.class=o+(o&&m&&\" \")+m,(0,preact__WEBPACK_IMPORTED_MODULE_0__.h)(preact_router__WEBPACK_IMPORTED_MODULE_1__.Link,p)}\n\n\n//# sourceURL=webpack://karenport/./node_modules/preact-router/match/index.mjs?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
+/******/ })()
+;

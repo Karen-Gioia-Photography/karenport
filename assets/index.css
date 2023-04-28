@@ -1,4 +1,4 @@
-/* 
+/*
     Document   : index
     Created on : Oct 20, 2013, 10:05:04 AM
     Author     : Jesse
@@ -25,7 +25,7 @@
 }
 
 
-body { 
+body {
     margin: 0px;
     padding: 0px;
     border: 0px;
@@ -38,21 +38,85 @@ body {
     display: none;
 }
 
+
+
+/*
+ * Left Side / Nav
+ */
+
 .stuckleft{
-    padding: 20px;
-    width: 340px;
+    padding: 20px 16px;
+    width: 240px;
     position: absolute;
     left:0px;
     top:0px;
     bottom:0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.content{
+#logo img{
+    width: 240px;
+}
+
+#menu{
+    padding: 20px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.menuItem{
+    margin: 8px 20px;
+}
+
+.menuItem a{
+    font-size: 16px;
+    font-weight: bold;
+    color: #c4c4c4;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#portfolio{
+    padding: 0 0 6px 16px;
+}
+
+#portfolio .gallery{
+    margin: 8px;
+}
+
+#portfolio .gallery a{
+    font-weight: normal;
+    font-size: 13px;
+}
+
+#copyrights{
+    position: static;
+    font-size: 11px;
+    padding: 25px 15px;
+}
+
+#copyrights.fixed{
+  position: absolute;
+    bottom: 0px;
+    left: 0px;
+  padding: 20px 31px;
+}
+
+
+
+
+/**
+ * Content / Galleries
+ */
+
+ .content{
     position: absolute;
     top: 0px;
     bottom: 0px;
     right: 0px;
-    left: 332px;
+    left: 280px;
     padding: 128px 40px;
 }
 
@@ -72,7 +136,35 @@ body {
 
 .content p{
     font-size: 16px;
-    line-height: 20px; 
+    line-height: 20px;
+}
+
+.content .about_image{
+  display: inline-block;
+  vertical-align: top;
+  width: 240px;
+  margin-right: 20px;
+}
+
+#about h1 {
+  margin-bottom: 32px;
+}
+
+#about .about_flex {
+  display: flex;
+  flex-direction: row;
+}
+
+#about .about_image {
+  width: 300px;
+}
+
+#about .about_image img{
+  width: 100%;
+}
+
+#about .about_text{
+  flex: 1;
 }
 
 #gallery_container{
@@ -99,22 +191,23 @@ body {
     height: 600px;
     position: absolute;
     left: 0px;
-    text-align: left;
+    transition: left 0.5s ease;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 #gallery_container .window .images .slide{
     height: 600px;
-  line-height: 600px;
     width: 800px;
-    text-align: center;
-    vertical-align: middle;
-    float: left;
 }
 
 #gallery_container .window .images .slide img{
     max-height: 600px;
     max-width: 800px;
     vertical-align: middle;
+    pointer-events: none;
 }
 
 #gallery_container .window .navbar{
@@ -129,7 +222,20 @@ body {
 
 #gallery_container .window .navbar .nav{
     height: 32px;
-    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#gallery_container .window .navbar .nav .navNode{
+    opacity: 0.5;
+}
+
+#gallery_container .window .navbar .nav .navNode.active{
+    opacity: 1;
 }
 
 
@@ -146,17 +252,15 @@ body {
     line-height: 600px;
     cursor: pointer;
     background-repeat: no-repeat;
-    background-position-y: 271px;
+  background-position: 20px center;
 }
 
 #gallery_container .arrowbox .photoArrow.left{
     background-image: url('tryagain.png');
-    background-position-x: 20px;
 }
 
 #gallery_container .arrowbox .photoArrow.right{
     background-image: url('othersidetryagain.png');
-    background-position-x: 20px;
 }
 
 
@@ -190,7 +294,7 @@ body {
 }
 
 #gallery_container .window .navbar .nav .navDitch{
-    width: 14px;
+    width: 5px;
     height: 30px;
     display: inline-block;
     vertical-align: top;
@@ -199,50 +303,49 @@ body {
 #gallery_container .window .navbar .nav .navThumb img{
     max-width: 40px;
     max-height: 30px;
-    
+    pointer-events: none;
 }
 
 
 #scrollist{
-	width: 800px;
-	height: 640px;
-	margin: 0px auto;
-	overflow-y: scroll;
+  width: 800px;
+  margin: 0px auto;
 }
 
 #scrollist h1{
-	text-align: left;
+  text-align: left;
 }
 
 #scrollist .scrollistItem{
-	text-align: left;
+  text-align: left;
 }
 
 #scrollist a{
-	display:block;
-	margin: 20px 0px;
+  display:block;
+  margin: 20px 0px;
 }
 
 #scrollist .scrollistImage{
-	display: inline-block;
-	width: 240px;
-	height: 180px;
-	line-height: 180px;
+  display: inline-block;
+  width: 100px;
+  height: 75px;
+  line-height: 75px;
 }
 #scrollist .scrollistImage img{
-	max-width: 240px;
-	max-height: 180px;
-	vertical-align: middle;
+  max-width: 100px;
+  max-height: 75px;
+  vertical-align: middle;
+  pointer-events: none;
 }
 
  #scrollist .scrollistDescription{
-	display: inline-block;
-	vertical-align: middle;
-	width: 400px;
-	line-height: 24px;
-	margin-left: 30px;
-	text-align: left;
-	font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 400px;
+  line-height: 18px;
+  margin-left: 30px;
+  text-align: left;
+  font-size: 14px;
  }
 
 
@@ -250,47 +353,3 @@ body {
 
 
 
-
-
-
-#logo img{
-    width: 300px;
-}
-
-#menu{
-    padding: 50px 50px 50px 100px;
-}
-
-.menuItem{
-    margin: 8px;
-}
-
-.menuItem a{
-    font-size: 16px;
-    font-weight: bold;
-    color: #c4c4c4;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#portfolio{
-    padding: 0px 16px;
-}
-
-#portfolio .gallery{
-    margin: 8px;
-}
-
-#portfolio .gallery a{
-    font-weight: normal;
-}
-
-
-
-
-#copyrights{
-    position: absolute;
-    bottom: 42px;
-    left: 42px;
-    font-size: 12px;
-}
