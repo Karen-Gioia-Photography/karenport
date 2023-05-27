@@ -20,7 +20,7 @@ const Contact = () => {
       <br />
       <br />
 
-      <p style="font-size: 0.9rem;">
+      <p>
         All images are the property of Karen Gioia and protected under US and
         International copyright laws. Copying, duplicating, saving as a digital
         file, printing, publishing in form of media including web, manipulating,

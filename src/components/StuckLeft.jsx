@@ -1,7 +1,10 @@
+import { useState } from "preact/hooks";
 import { Link } from "preact-router/match";
 import PortfolioMenu from "./PortfolioMenu";
 
 const StuckLeft = () => {
+  const [portfolioExpanded, setPortfolioExpanded] = useState(false);
+
   return (
     <div class="stuckleft">
       <div id="logo">
@@ -18,8 +21,13 @@ const StuckLeft = () => {
         </div>
 
         <div id="portflio_item" class="menuItem">
-          <a>Portfolio</a>
-          <div id="portfolio">
+          <a onClick={() => setPortfolioExpanded(!portfolioExpanded)}>
+            Portfolio
+          </a>
+          <div
+            id="portfolio"
+            style={{ display: portfolioExpanded ? "block" : "none" }}
+          >
             <PortfolioMenu />
           </div>
         </div>
