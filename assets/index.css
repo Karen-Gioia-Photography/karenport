@@ -228,8 +228,16 @@ body {
     flex-direction: row;
     gap: 0.3rem;
     align-items: center;
+}
+
+#gallery_container .window .navbar .nav.thumb{
     justify-content: flex-start;
 }
+
+#gallery_container .window .navbar .nav.node{
+    justify-content: center;
+}
+
 
 #gallery_container .window .navbar .nav .navNode{
     opacity: 0.5;

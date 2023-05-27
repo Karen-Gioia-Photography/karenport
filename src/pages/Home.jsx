@@ -35,7 +35,7 @@ const Home = () => {
 
   const { imagesCollection } = response.imageSet;
 
-  return <CarouselGallery images={imagesCollection.items} withThumbs />;
+  return <CarouselGallery images={imagesCollection.items} withTimer />;
 };
 
 export default Home;

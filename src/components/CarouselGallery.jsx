@@ -1,40 +1,56 @@
 import { Link } from "preact-router";
-import { useState, useCallback } from "preact/hooks";
+import { useState, useCallback, useEffect, useRef } from "preact/hooks";
 
 const SLIDE_WIDTH = 800;
 const NAV_WIDTH = 40;
+const SLIDE_TIMER_DURATION = 5000; //ms
 
-const CarouselGallery = ({ images, withThumbs }) => {
+const CarouselGallery = ({ images, withThumbs, withTimer }) => {
   const [slide, setSlide] = useState(0);
   const [navIdx, setNavIdx] = useState(0);
 
   const crementSlide = useCallback(
-    (idxCrement) => {
-      const newIdx = slide + idxCrement;
+    (idxCrement, callback = undefined) => {
+      let newIdx = slide + idxCrement;
       if (newIdx >= images.length) {
-        setSlide(0);
+        newIdx = 0;
       } else if (newIdx < 0) {
-        setSlide(images.length - 1);
-      } else {
-        setSlide(newIdx);
+        newIdx = images.length - 1;
       }
+      setSlide(newIdx, callback);
     },
     [slide, images]
   );
 
   const crementNav = useCallback(
-    (idxCrement) => {
-      const newIdx = navIdx + idxCrement;
+    (idxCrement, callback = undefined) => {
+      let newIdx = navIdx + idxCrement;
       if (newIdx >= images.length) {
-        setNavIdx(0);
+        newIdx = 0;
       } else if (newIdx < 0) {
-        setNavIdx(images.length - 1);
-      } else {
-        setNavIdx(newIdx);
+        newIdx = images.length - 1;
       }
+      setNavIdx(newIdx, callback);
     },
     [navIdx, images]
   );
+
+  const crementSlideRef = useRef(crementSlide);
+
+  useEffect(() => {
+    crementSlideRef.current = crementSlide;
+  }, [crementSlide]);
+
+  useEffect(() => {
+    if (withTimer) {
+      const timer = setInterval(() => {
+        crementSlideRef.current(1);
+      }, SLIDE_TIMER_DURATION);
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, []);
 
   return (
     <div id="gallery_container">
@@ -47,7 +63,7 @@ const CarouselGallery = ({ images, withThumbs }) => {
         </div>
         <div className="window">
           <div className="navbar" style={{ left: -navIdx * NAV_WIDTH }}>
-            <div className="nav">
+            <div className={`nav ${withThumbs ? "thumb" : "node"}`}>
               {images.map((image, ix) => {
                 if (withThumbs) {
                   return (
