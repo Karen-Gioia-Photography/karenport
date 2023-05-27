@@ -228,7 +228,7 @@ body {
     flex-direction: row;
     gap: 0.3rem;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #gallery_container .window .navbar .nav .navNode{

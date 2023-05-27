@@ -86,7 +86,7 @@ const CarouselGallery = ({ images, withThumbs }) => {
                 );
               } else {
                 return (
-                  <Link href={`/portfolio/${tags[0].id}`} className="slide">
+                  <Link href={`/gallery/${tags[0].id}`} className="slide">
                     <img src={image.url} />
                   </Link>
                 );
