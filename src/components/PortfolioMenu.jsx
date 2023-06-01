@@ -2,14 +2,18 @@ import { Fragment } from "preact";
 import { Link } from "preact-router/match";
 import { useContentful } from "../useContentful";
 
+const LISTING_ENTRY_ID = "2sHHTRhUx9Zxqo89WEJF38";
+
 const query = `
 {
-  imageSetCollection {
-    items {
-      name
-      contentfulMetadata{
-        tags{
-          id
+  portfolioListing(id:"${LISTING_ENTRY_ID}") {
+    imageSetsCollection {
+      items {
+        name
+        contentfulMetadata{
+          tags{
+            id
+          }
         }
       }
     }
@@ -47,9 +51,10 @@ const PortfolioMenu = () => {
     return null;
   }
 
-  const imageSetItems = response.imageSetCollection.items.filter(
-    (item) => item.label !== "home"
-  );
+  const imageSetItems =
+    response.portfolioListing.imageSetsCollection.items.filter(
+      (item) => item.label !== "home"
+    );
 
   return (
     <Fragment>
