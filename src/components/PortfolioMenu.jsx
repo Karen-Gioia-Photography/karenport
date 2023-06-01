@@ -23,9 +23,12 @@ const PortfolioItem = ({ imageSet }) => {
     return null;
   }
 
+  const tagId = tags[0].id;
+  const pathname = window.location.pathname;
+
   return (
     <div class="gallery">
-      <Link href={`/gallery/${tags[0].id}`} activeClassName="active">
+      <Link href={`/gallery/${tagId}`} activeClassName="active">
         {imageSet.name}
       </Link>
     </div>
