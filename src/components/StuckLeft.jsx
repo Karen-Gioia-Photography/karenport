@@ -2,8 +2,9 @@ import { useState } from "preact/hooks";
 import { Link } from "preact-router/match";
 import PortfolioMenu from "./PortfolioMenu";
 
-const StuckLeft = ({ forcePortfolioOpen }) => {
-  const [portfolioExpanded, setPortfolioExpanded] = useState(false);
+const StuckLeft = ({ initialPortfolioOpen }) => {
+  const [portfolioExpanded, setPortfolioExpanded] =
+    useState(initialPortfolioOpen);
 
   return (
     <div class="stuckleft">
@@ -27,8 +28,7 @@ const StuckLeft = ({ forcePortfolioOpen }) => {
           <div
             id="portfolio"
             style={{
-              display:
-                portfolioExpanded || forcePortfolioOpen ? "block" : "none",
+              display: portfolioExpanded ? "block" : "none",
             }}
           >
             <PortfolioMenu />

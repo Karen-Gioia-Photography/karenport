@@ -9,19 +9,19 @@ import Gallery from "./pages/Gallery";
 const GALLERY_PATH_TOKEN = "/gallery/";
 
 const App = () => {
-  const [forcePortfolioOpen, setForcePortfolioOpen] = useState(
+  const [initialPortfolioOpen, setinitialPortfolioOpen] = useState(
     window.location.pathname.includes(GALLERY_PATH_TOKEN)
   );
 
   const handleRoute = (ev) => {
     if (ev.url.includes(GALLERY_PATH_TOKEN)) {
-      setForcePortfolioOpen(true);
+      setinitialPortfolioOpen(true);
     }
   };
 
   return (
     <div>
-      <StuckLeft forcePortfolioOpen={forcePortfolioOpen} />
+      <StuckLeft initialPortfolioOpen={initialPortfolioOpen} />
       <div class="content">
         <Router onChange={handleRoute}>
           <Home path="/" />
