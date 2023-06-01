@@ -55,12 +55,14 @@ const CarouselGallery = ({ images, withThumbs, withTimer }) => {
   return (
     <div id="gallery_container">
       <div id="unit">
-        <div className="arrowbox left">
-          <div className="photoArrow left" onClick={() => crementSlide(-1)} />
-          <div className="navArrow left" onClick={() => crementNav(-3)}>
-            ◀
+        {withTimer ? null : (
+          <div className="arrowbox left">
+            <div className="photoArrow left" onClick={() => crementSlide(-1)} />
+            <div className="navArrow left" onClick={() => crementNav(-3)}>
+              ◀
+            </div>
           </div>
-        </div>
+        )}
         <div className="window">
           <div className="navbar" style={{ left: -navIdx * NAV_WIDTH }}>
             <div className={`nav ${withThumbs ? "thumb" : "node"}`}>
@@ -110,12 +112,19 @@ const CarouselGallery = ({ images, withThumbs, withTimer }) => {
             })}
           </div>
         </div>
-        <div className="arrowbox right">
-          <div className="photoArrow right" onClick={() => crementSlide(1)} />
-          <div className="navArrow right" onClick={() => crementNav(3)}>
-            ▶
+        {withTimer ? null : (
+          <div className="arrowbox right">
+            {withTimer ? null : (
+              <div
+                className="photoArrow right"
+                onClick={() => crementSlide(1)}
+              />
+            )}
+            <div className="navArrow right" onClick={() => crementNav(3)}>
+              ▶
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
